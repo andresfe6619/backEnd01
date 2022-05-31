@@ -54,7 +54,7 @@
 
 
 // saveObject(object) {
-//  //let  Id = Math.floor(Math.random() * 100);; 
+//  
 // let Ids  
 // if (this.Product.length === 0) {
 //     Ids = 1; 
