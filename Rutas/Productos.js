@@ -72,14 +72,16 @@ router.get ("/Listado", (req, res) => {
  )
  router.use(bodyParser.json());
     router.use(bodyParser.urlencoded({ extended: true }));
- router.post("/agregar", (req, res) => {
+ 
+ 
+    router.post("/agregar", (req, res) => {
   const {title, price, thumbnail} = req.body;
     let objeto = (title, price, thumbnail);
     Objeto5.saveObject({title, price, thumbnail});
 
 let id = Objeto5.Product.length;
     
-    res.sendStatus(Objeto5.Product[id-1]);
+    res.send(Objeto5.Product[id-1]);
     });
 
 
@@ -120,8 +122,8 @@ let id = Objeto5.Product.length;
             actualizarProducto.title = title;
             actualizarProducto.price = price;
             actualizarProducto.thumbnail = thumbnail;
-                await fs.promises.writeFile("./contenedor.json",JSON.stringify( data ) )
-                return ( actualizarProducto ?  res.send(actualizarProducto) : res.send({Error: "El producto no existe"}));
+                await fs.promises.writeFile("./contenedor.json",JSON.stringify( actualizarProducto ) )
+                return ( actualizarProducto ?  res.send((actualizarProducto)) : res.send({Error: "El producto no existe"}));
 
        } catch(error) {
                      console.log(error);
