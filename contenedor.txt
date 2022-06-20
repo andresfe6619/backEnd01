@@ -1,1 +1,1 @@
-[{"title":"Creatina","price":100,"thumbnail":" https://www.creatina.com/wp-content/uploads/2019/01/Creatina-Logo-1.png","id":2},{"title":"Pre-workout","price":50,"thumbnail":"https://www.pre-workout.com/wp-content/uploads/2019/01/Pre-Workout-Logo-1.png","id":3}]
+[{"title":"prod2","price":123,"thumbnail":"...","id":2}]
