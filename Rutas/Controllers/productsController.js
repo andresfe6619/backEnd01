@@ -130,13 +130,19 @@ const Objeto5 = new Contenedor([]);
 //  Objeto5.saveObject  ({title:"Pre-workout", price: 50,thumbnail:"https://www.pre-workout.com/wp-content/uploads/2019/01/Pre-Workout-Logo-1.png", });
 
 const showAll = async(req, res) => { 
-    try {
-        const prods = await Objeto5.getAll()
-        
-        res.render("products", {prods, hasAny: true});
+try {
    
+ 
+        const prods = await Objeto5.getAll()
+  
+        if (prods.length == 0) {
+            res.render("products", {prods, });
+        } else{
+        res.render("products", {prods, hasAny: true});
+        }
     } catch (error) {
-        return []
+        const prods = await Objeto5.getAll()
+        res.render("products", {prods, hasAny: false});
     }
 };
 
