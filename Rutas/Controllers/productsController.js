@@ -135,14 +135,23 @@ try {
  
         const prods = await Objeto5.getAll()
   
+        // if (prods.length == 0) {
+        //     res.render("products", {prods, });
+        // } else{
+        // res.render("product", {prods, hasAny: true});
+        // }
+   
         if (prods.length == 0) {
-            res.render("products", {prods, });
+            res.render("products1.pug", {prods, });
         } else{
-        res.render("products", {prods, hasAny: true});
+        res.render("products1.pug", {prods, hasAny: true});
         }
+   
+   
     } catch (error) {
         const prods = await Objeto5.getAll()
-        res.render("products", {prods, hasAny: false});
+        // res.render("products", {prods, hasAny: false});
+     res.render("products1.pug", {prods, hasAny: false});
     }
 };
 

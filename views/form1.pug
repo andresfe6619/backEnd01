@@ -1,0 +1,25 @@
+extends main.pug 
+
+block datos 
+ 
+  form(action="/api/productos/agregar", method="post")
+    div(class="mb-3")
+      
+     
+      <label for="exampleInputEmail1" class="form-label" >titulo</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="title">
+    
+    div(class="mb-3")
+      <label for="exampleInputPassword1" class="form-label">Precio</label>
+      <input type="number" class="form-control" id="exampleInputPassword1" name="price">
+ 
+   
+    div(class="mb-3")
+      <label for="exampleInputPassword1" class="form-label">Imagen</label>
+      <input type="text" class="form-control" id="exampleInputPassword1" name="thumbnail">
+
+ 
+      
+  
+  
+    <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">Submit</button>

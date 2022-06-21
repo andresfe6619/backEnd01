@@ -11,7 +11,8 @@ const Productos = require("./Productos.js");
 
 
 router.get('/home', (req, res) => {
-    res.render('form');
+  //res.render("form")  
+    res.render('form1.pug');
     ;
 });
 let visitas=0
