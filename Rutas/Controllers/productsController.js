@@ -134,24 +134,35 @@ try {
    
  
         const prods = await Objeto5.getAll()
-  
+        //handlebars
         // if (prods.length == 0) {
         //     res.render("products", {prods, });
         // } else{
         // res.render("product", {prods, hasAny: true});
         // }
-   
+         //pug
+        // if (prods.length == 0) {
+        //     res.render("products1.pug", {prods, });
+        // } else{
+        // res.render("products1.pug", {prods, hasAny: true});
+        // }
+        //ejs
         if (prods.length == 0) {
-            res.render("products1.pug", {prods, });
+            res.render("products2.ejs", {prods, });
         } else{
-        res.render("products1.pug", {prods, hasAny: true});
+        res.render("products2.ejs", {prods, hasAny: true});
         }
-   
    
     } catch (error) {
         const prods = await Objeto5.getAll()
+        //Handlebars
         // res.render("products", {prods, hasAny: false});
-     res.render("products1.pug", {prods, hasAny: false});
+        //PUG
+        //  res.render("products1.pug", {prods, hasAny: false});
+        //EJS
+         res.render("products2.ejs", {prods, hasAny: false});
+    
+    
     }
 };
 

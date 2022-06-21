@@ -19,10 +19,13 @@ app.use(express.urlencoded({ extended: true }))
 // app.set('views', path.join(__dirname, './views'))
 // app.set('view engine', 'hbs')
 //Pug
-app.engine('pug', require('pug').__express)
-app.set('views', path.join(__dirname, './views'))
-app.set('view engine', 'pug')
+// app.engine('pug', require('pug').__express)
+// app.set('views', path.join(__dirname, './views'))
+// app.set('view engine', 'pug')
 
+//EJs
+app.set('views', path.join(__dirname, './views'))
+app.set('view engine', 'ejs')
 
 
 app.use("/api", rutas);
