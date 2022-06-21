@@ -12,12 +12,9 @@ const Productos = require("./Productos.js");
 
 router.get('/home', (req, res) => {
   //handlebars
-    //res.render("form")  
+    res.render("form")  
    
-  //pug 
-    // res.render('form1.pug');
-  //ejs
-       res.render("form2.ejs");
+
 
 
 });
