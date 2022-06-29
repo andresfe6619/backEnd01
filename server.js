@@ -20,10 +20,11 @@ app.use(express.urlencoded({ extended: true }))
 function saveMessages(something){
     fs.appendFileSync('messages.txxt', JSON.stringify(something))
 
-
-
 }
+function saveProducts(somethingElse){
 
+    fs.appendFileSync('products.txt', JSON.stringify(somethingElse))
+}
 
 
 
@@ -35,8 +36,9 @@ socket.emit('server:mensajes', messagesArray)
 socket.on ("client: new product", product => {
       productos.push(product)
       
-      io.emit("server: productos", product)
+      io.emit("server: productos", productos)
     
+    saveProducts(product)
     })
 socket.on('client:message', messageInfo => {
       messagesArray.push(messageInfo)

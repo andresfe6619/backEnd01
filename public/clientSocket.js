@@ -17,14 +17,15 @@ function NewProduct(product) {
 }
 
 async function renderProducts(products) {    
-    const response =  await fetch("./productos.hbs")
-    const plantilla = await response.text()   
-     
+     await fetch("./productos.hbs").then((
+     response) => {   
+        response.text().then((plantilla) => {
+     document.querySelector("#productos1").innerHTML = " "
     
-    await products.forEach(product => {
+     products.forEach((product) => {
         const template =  Handlebars.compile(plantilla)
         const html =  template(product)
-        document.querySelector("#productos1").innerHTML += html
+        document.querySelector("#productos1").innerHTML += html})})
     })
 }
 
@@ -70,7 +71,7 @@ function renderMessages(messagesInfo) {
         messagesPool.innerHTML = html;    
 }
 
-function submitHandler (event) {
+function submitHandler2 (event) {
     event.preventDefault()
     
     const messageInfo = { Email: Email.value, message: messageInput.value,  Date: fecha }
@@ -79,6 +80,6 @@ function submitHandler (event) {
 }
 
 
-messageForm.addEventListener('submit', submitHandler)
+messageForm.addEventListener('submit', submitHandler2)
 
 socket.on('server:mensajes', renderMessages)
