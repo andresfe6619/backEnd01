@@ -4,22 +4,20 @@ const router = new Router();
 const fs = require('fs'); 
 const bodyParser = require('body-parser');
 const { append } = require("express/lib/response");
+const { stringify } = require('querystring');
 
 class Contenedor {
-    constructor( id) {
+    constructor(  ) {
+     
         this.Carrito = [];  
-}
+
+
+    }
 
 async saveObject(object) {
- 
-    let Ids  
-    if (this.Carrito.length === 0) {
-        Ids = 1; 
-        
-    }
-    else {
-        Ids = this.Carrito.length + 1;
-    }
+
+    let Ids  = Math.random().toString(32).substring(2);
+    
     let timeStamp =  Date()
     
     const Objeto6= {...object, id: Ids, timeStamp: timeStamp};
@@ -27,17 +25,21 @@ async saveObject(object) {
     await fs.promises.writeFile("./contenedor2.json",JSON.stringify( this.Carrito ) )
     console.log("Producto guardado");
 }
-// NO FUNCIONA COMO DEBERIA
-async addProductIntoCarro(product) {
-    const data =JSON.parse (await  fs.promises.readFile("./contenedor2.json", "utf-8" ))
-    
-    let prod = []
-    prod.push ({data , producto: []  })
-    prod[0].producto.push({...product})
-    
 
-    await fs.promises.writeFile("./carritoContenedor.json", JSON.stringify( prod) )
-    console.log("Producto agregado al carro");
+async addProductFrom() {
+    const data =JSON.parse (await  fs.promises.readFile("./contenedor2.json", "utf-8" ))
+     return ( data ? data : console.log("El archivo no existe o esta vacio"));
+
+    
+   
+}
+async addProductInto (cart, product) {
+  const array = []
+  const contenedor ={...cart  [0], productos: product};
+    array.push(contenedor);
+    
+  await fs.promises.writeFile("./carritoContenedor.json", JSON.stringify(array))
+
 }
 
 
@@ -74,11 +76,18 @@ async getById(Id) {
 //NO FUNCIONA
 async getByIdFromdb(Id, id_prod) {
     const data = JSON.parse(await  fs.promises.readFile("./carritoContenedor.json", "utf-8" ))     
-    const product = data.find(product => product.id === Number(Id)); 
-     if(product === undefined){
+    const product = data.find(product => product.id === (Id));
+     console.log(product.id)
+     console.log(Id)
+
+    if(product === undefined){
         return console.log(product)
  }else{
-    const newData = data.filter(product => product.id !== Number(id_prod));
+    const erase =[]
+    erase.push(product)
+    console.log(erase)
+    const newData = erase.filter(product => product.id !== Number(id_prod));
+   
     await fs.promises.writeFile("./carritoContenedor.json",JSON.stringify( newData ) )
  } 
    
@@ -231,7 +240,8 @@ const addProductById= async(req, res) => {
     try {
         const {id} = req.params;
         const product = await Objeto5.addFromdb(id);
-        const cart = Objeto5.addProductIntoCarro(product);
+        const cart = await Objeto5.addProductFrom();
+        const add = await Objeto5.addProductInto(cart, product);
         res.json(product);
     } catch (error) {
         console.log(error);
@@ -243,7 +253,7 @@ const deleteByIdCart = async(req, res) => {
         
         const product= await Objeto5.getByIdFromdb(id, id_prod);
         
-        res.json(product);
+        res.send(`El producto con el id ${id_prod} ha sido eliminado`);
     } catch (error) {
         console.log(error);
 
