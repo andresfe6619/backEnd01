@@ -160,8 +160,8 @@ try {
 
 const newProduct= (req, res) => {
     try {
-        const {title, price, thumbnail, descrip} = req.body;
-        let objeto = {title, price, thumbnail, descrip};
+        const {title, price, thumbnail, descrip, stock} = req.body;
+        let objeto = {title, price, thumbnail, descrip, stock};
         Objeto5.saveObject(objeto);
         // let id = Objeto5.Product.length;
         // res.sendStatus(Objeto5.Product[id-1]);
@@ -194,7 +194,9 @@ const updateById= async(req, res) => {
             title: req.body.title,
             price: req.body.price,
             thumbnail: req.body.thumbnail,
-            descrip : req.body.descrip
+            descrip : req.body.descrip,
+            stock : req.body.stock
+        
         }
         await Objeto5.updateById(id, newProd);
     //   let idRandom= Number(req.params.id)
