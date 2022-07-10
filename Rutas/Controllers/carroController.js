@@ -1,4 +1,4 @@
-const Contenedor = require('./carroContenedor.js')
+const Contenedor = require('./carroModelo.js')
 
 const Objeto5 = new Contenedor([]);
 
