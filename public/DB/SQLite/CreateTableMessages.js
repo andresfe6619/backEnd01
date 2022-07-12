@@ -17,9 +17,8 @@ const createMessagesTable = async () => {
         
 }
 
- createMessagesTable()
+createMessagesTable();
 
 
- module.exports = {createMessagesTable}
 
  

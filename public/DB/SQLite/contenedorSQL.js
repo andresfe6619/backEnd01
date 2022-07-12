@@ -1,5 +1,5 @@
 const database = require('../database').databaseConnectionSQLite3
-const createMessagesTable = require("./CreateTableMessages");
+
 class Contenedor {
     constructor(table) {
         this.table = table
@@ -24,7 +24,7 @@ class Contenedor {
         } catch (err) {
             /* if no table */
             if (err.errno === 1146){
-               
+             
             }
         }}
 

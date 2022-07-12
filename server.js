@@ -52,8 +52,8 @@ socket.on ("client: new product", async product => {
     
 socket.on('client:message', async messageInfo => {
   await ContenedorMensajes.saveSQL(messageInfo)
-      console.log(messages)
-      io.emit('server:mensajes', messages)
+      
+      io.emit('server:mensajes', messageInfo)
     
  
     })  

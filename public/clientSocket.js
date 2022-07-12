@@ -62,9 +62,9 @@ function renderMessages(messagesInfo) {
         
         const html = messagesInfo.map(msgInfo => {
             return(`<div>
-                <strong id="Email1">${msgInfo.Email}</strong>:
+                <strong id="EmailShow">${msgInfo.Email}</strong>:
                 <em id="Date"> ${msgInfo.Date} </em>
-                <em id="Message">${msgInfo.message}</em> </div>
+                <em id="Message">${msgInfo.Message}</em> </div>
                 `)
             }).join(" ");
        
@@ -74,7 +74,7 @@ function renderMessages(messagesInfo) {
 function submitHandler2 (event) {
     event.preventDefault()
     
-    const messageInfo = { Email: Email.value, message: messageInput.value,  Date: fecha }
+    const messageInfo = { Email: Email.value, Message: messageInput.value,  Date: fecha }
 
     sendMessage(messageInfo)
 }
