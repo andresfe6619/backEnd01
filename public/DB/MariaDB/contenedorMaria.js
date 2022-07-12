@@ -1,5 +1,5 @@
 const fs = require("fs");
-const database = require("./database");
+const database = require("../database").databaseConnection;
 class Contenedor {
     constructor(table) {
         this.table = [table]

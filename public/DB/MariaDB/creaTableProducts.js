@@ -1,4 +1,4 @@
-const database = require('./database')
+const database = require('../database').databaseConnection
 
 const createProductsTable = async () => {
     try{

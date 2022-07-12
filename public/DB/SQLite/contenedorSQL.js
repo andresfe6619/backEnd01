@@ -1,4 +1,4 @@
-const database = require("./database");
+const database = require('../database').databaseConnectionSQLite3
 const createMessagesTable = require("./CreateTableMessages");
 class Contenedor {
     constructor(table) {
@@ -9,7 +9,7 @@ class Contenedor {
         try {
             
             await database("mensajes").insert(objeto)
-            this.table.push(objeto);
+            
             console.log("Mensajes guardados");
             return objeto;
         } catch (err) {
