@@ -8,9 +8,9 @@ const  fs  = require('fs');
 require("dotenv").config({path: ".env"});
 const puerto= process.env.PORT;
 
-const productos = []
-const messagesArray = []
-
+const {contenedorProductos} = require('./public/MariaDB/contenedor.js');
+const messagesArray = [];
+const {ContenedorMensajes} = require('./public/SQLite/contenedor.js');
 const expressServer= app.listen(puerto, () => {
     console.log('Servidor corriendo en el puerto '+puerto);
 })
@@ -36,28 +36,29 @@ function saveProducts(somethingElse){
 
 
 
-io.on('connection', (socket) => { 
+io.on('connection', async (socket) => { 
   console.log( "un cliente se ha conectado")
-socket.emit("server: productos", productos)
-socket.emit('server:mensajes', messagesArray)
 
-socket.on ("client: new product", product => {
-      productos.push(product)
-      
-      io.emit("server: productos", productos)
+const products = await contenedorProductos.getAll()
+const messages = await ContenedorMensajes.getAllSQL()
+
+  socket.emit("server: productos", products)
+  socket.emit('server:mensajes', messages)
+
+socket.on ("client: new product", async product => {
+  await  contenedorProductos.save(product)
+  io.emit("server: productos", product)})
     
-    saveProducts(product)
-    })
-socket.on('client:message', messageInfo => {
-      messagesArray.push(messageInfo)
+socket.on('client:message', async messageInfo => {
+  await ContenedorMensajes.saveSQL(messageInfo)
       
-      io.emit('server:mensajes', messagesArray)
-      saveMessages(messageInfo)
+      io.emit('server:mensajes', messageInfo)
+    
  
     })  
 
+  })
 
-})
 
 //Handlebars
 app.engine('hbs', engine({
