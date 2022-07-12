@@ -20,6 +20,6 @@ const createMessagesTable = async () => {
  createMessagesTable()
 
 
-module.exports = {createMessagesTable}
+ module.exports = {createMessagesTable}
 
  

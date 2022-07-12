@@ -2,13 +2,14 @@ const fs = require("fs");
 const database = require("./database");
 class Contenedor {
     constructor(table) {
-        this.table = table
+        this.table = [table]
     }
 
     async save(objeto) {
         try {
             const id = await database("productos").insert(objeto)
             objeto.id = id[0];
+            this.table.push(objeto);
             console.log("Producto cargado con ID : ", objeto.id);
             return objeto;
         } catch (err) {
@@ -17,26 +18,32 @@ class Contenedor {
     }
 
     async saveById(id, objeto) {
-        const index = this.productos.findIndex(producto => producto.id === id)
-        if (index != -1) {
-            objeto.id = id;
-            this.productos[index] = objeto;
-
-            try {
-                await fs.promises.writeFile(this.table, JSON.stringify(this.productos));
-            } catch (err) {
-                console.log("Error guardando producto por ID. Code: ", err)
+        try {
+            const rid = await database.from(this.table).where('id', '=', id).update(objeto)
+            if (rid === 0) {
+                return { error: `Producto de ID ${id} no encontrado` }
+            } else {
+                return { success: `Producto de ID ${id} actualizado` }
             }
-
-            return this.productos[index];
-        } else {
-            return { error: `No se encontró el producto con ID ${id}` }
+        } catch (err) {
+            console.log("Error guardando producto por ID. Code: ", err)
+            return {error: "error guardando producto"}
         }
     }
 
-    getById(id) {
-        const objeto = this.productos.find(producto => producto.id === id);
-        return (objeto ? objeto : { error: `No se encontró el producto con ID ${id}` });
+    async getById(id) {
+        try {
+            const product = await database.from(this.table).where({id})
+            
+            if (product[0]) {
+                return product[0]
+            } else {
+                return { error: `Producto de ID ${id} no encontrado` }
+            }
+        } catch (err) {
+            console.log("Error buscando producto. Code: ", err)
+            return {error: "error buscando producto"}
+        }
     }
 
     async getAll() {
@@ -45,35 +52,29 @@ class Contenedor {
             return productos;
         } catch (err) {
             /* if no table */
-            if (err.errno === 1146){
-               
+            if (err.errno === 1146) {
+                await createTable();
+                console.log(`Tabla ${this.table} creada`)
+                return []
+            } else{
+                console.log("Error buscando productos. Code: ", err)
+                return {error: "error buscando producto"}
             }
         }
     }
 
     async deleteById(id) {
-        const index = this.productos.findIndex(producto => producto.id === id)
-        if (index != -1) {
-            const removedItem = this.productos.splice(index, 1);
-            const removedItems = []
-
-            try {
-                removedItems = JSON.parse(await fs.promises.readFile("./src/deletedProducts.txt", "utf-8"))
-                removedItems.push(removedItem);
-                await fs.promises.writeFile("./src/deletedProducts.txt", JSON.stringify([removedItems]));
-                await fs.promises.writeFile(this.table, JSON.stringify(this.productos))
-            } catch (err) {
-                if (err.code === 'ENOENT') {
-                    await fs.promises.writeFile("./src/deletedProducts.txt.txt", JSON.stringify([removedItem]));
-                } else {
-                    console.log("Error eliminando por ID. Code: ", err)
-                }
+        try {
+            const rid = await database(this.table).where({id}).del()
+            if (rid === 0) {
+                return { error: `Producto de ID ${id} no encontrado` }
+            } else {
+                return { success: `Producto de ID ${id} eliminado` }
             }
-            return { success: `Producto con ID ${id} eliminado` }
-        } else {
-            return { error: `No se encontró el producto con ID ${id}` }
+        } catch (err) {
+            console.log("Error eliminando producto por ID. Code: ", err)
+            return { error: `Error eliminando producto` }
         }
     }
 }
-
 module.exports = Contenedor;

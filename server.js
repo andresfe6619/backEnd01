@@ -9,7 +9,7 @@ require("dotenv").config({path: ".env"});
 const puerto= process.env.PORT;
 
 const {contenedorProductos} = require('./public/MariaDB/contenedor.js');
-const messagesArray = [];
+const ArrayProductos = [];
 const {ContenedorMensajes} = require('./public/SQLite/contenedor.js');
 const expressServer= app.listen(puerto, () => {
     console.log('Servidor corriendo en el puerto '+puerto);
@@ -47,12 +47,13 @@ const messages = await ContenedorMensajes.getAllSQL()
 
 socket.on ("client: new product", async product => {
   await  contenedorProductos.save(product)
-  io.emit("server: productos", product)})
+  
+  io.emit("server: productos", products)})
     
 socket.on('client:message', async messageInfo => {
   await ContenedorMensajes.saveSQL(messageInfo)
       
-      io.emit('server:mensajes', messageInfo)
+      io.emit('server:mensajes', messages)
     
  
     })  

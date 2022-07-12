@@ -9,7 +9,7 @@ class Contenedor {
         try {
             
             await database("mensajes").insert(objeto)
-            
+            this.table.push(objeto);
             console.log("Mensajes guardados");
             return objeto;
         } catch (err) {

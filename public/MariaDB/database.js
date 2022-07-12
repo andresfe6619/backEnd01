@@ -12,3 +12,4 @@ const config = {
 const databaseConnection = knex(config)
 
 module.exports = databaseConnection
+
