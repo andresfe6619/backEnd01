@@ -49,19 +49,20 @@ async getAll () {
         return resultado;
     }
     
-    async crearCarrito () {
+    async saveCartCont () {
         const nuevoCarrito = { timestamp: "", productos: []};
-        let resultado = await this.guardar(nuevoCarrito);
+        let resultado = await this.saveObject(nuevoCarrito);
         return resultado.id;
     }
 
     async saveInCart ( idCart, elemento) {
         let resultado;
-        let tempCart = await this.listarUno(idCart);
+        let tempCart = await this.getById(idCart);
         if ( tempCart ){
-            tempCart.productos.push(elemento);
-            await this.actualizar(idCart, tempCart);
-            resultado = "Producto agregado en carrito correctamente";
+         elemento._id  = tempCart.productos.length + 1;   
+            tempCart.productos.push( elemento);
+            await this.updateById(idCart, tempCart);
+            resultado = `Producto : ${elemento.title},  ha sido añadido correctamente al cart con ID ${idCart}`;
         } else {
             resultado = "El id de carrito no existe";
         }
@@ -70,23 +71,22 @@ async getAll () {
 
     async eraseFromCart (idCart, idProduct) {
         let resultado;
-        let tempCart = await this.listarUno(idCart);
+        let tempCart = await this.getById(idCart);
         if (tempCart){
             let arrayProducts = tempCart.productos;
-            const indiceEncontrado = arrayProducts.findIndex((producto) => {
-                return producto._id === idProduct;
-            });
-            if (indiceEncontrado >= 0) {
-                arrayProducts.splice(indiceEncontrado, 1);
-                await this.coleccion.findByIdAndUpdate(idCart, {productos: arrayProducts});
-                resultado = `Producto con ID ${idProduct}, eliminado correctamente del cart con ID ${idCart}`;
-            } else {
-                resultado = "El carrito es correcto pero el producto no existe";
-            }
-        } else {
-            resultado = "El carrito no existe"
-        }
-        return resultado;
+            let index = arrayProducts.findIndex(x => x._id == idProduct);
+              console.log ("indice : ", index)
+            if (index >= 0) {
+                 arrayProducts.splice(index, 1);
+                 await this.collection.findByIdAndUpdate(idCart, {productos: arrayProducts});
+                 resultado = `Producto con ID ${idProduct}, eliminado correctamente del cart con ID ${idCart}`;
+             } else {
+                 resultado = "El carrito es correcto pero el producto no existe";
+             }
+         } else {
+             resultado = "El carrito no existe"
+         }
+     return resultado;
     }
 }
 

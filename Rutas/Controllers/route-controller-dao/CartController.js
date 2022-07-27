@@ -4,7 +4,7 @@ import { CarroDao } from "../Daos/indexDao.js";
 const saveCart = async (req, res) => {
     try {
         const resultado = await CarroDao.saveCartCont();
-        res.send(resultado);
+        res.send(`id del carrito ${resultado}`);
     } catch (error) {
         console.log('Ocurrio el siguiente error al querer crear un nuevo CarroDao', error);
         res.sendStatus(500);
@@ -16,7 +16,7 @@ const deleteById = async (req, res) => {
         if (!resultado){
             res.send("El id de CarroDao no existe");
         } else {
-            res.sendStatus(200);
+            res.sendStatus("el carrito ha sido eliminado");
         }
     } catch (error) {
         console.log('Ocurrio el siguiente error al querer eliminar el CarroDao', error)
@@ -46,7 +46,7 @@ const deleteByIdCart = async (req, res) => {
     try {
         let resultado = await CarroDao.eraseFromCart(req.params.id, req.params.id_prod);
         console.log("Resultado: ", resultado);
-        res.sendStatus(200);
+        res.send(resultado);
     } catch (error) {
         console.log('Ocurrio el siguiente error al querer eliminar el producto del carrito', error);
         res.sendStatus(500);

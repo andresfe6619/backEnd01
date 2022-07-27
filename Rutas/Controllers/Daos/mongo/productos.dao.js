@@ -8,7 +8,7 @@ class contenedorProds extends ContenedorMongo{
             thumbnail: { type: String, required: true },
             descrip: { type: String, required: true },          
             stock: { type: Number, required: true },          
-            timestamp: { type: String, required: true},
+        
             codigo: { type: String, required: true },
          })
    }

@@ -7,18 +7,18 @@ const showAll = async(req, res) => {
        
      
             const prods = await ProductDao.getAll()
-       
-            if (prods.length == 0) {
-                res.render("products", {prods, });
-            } else{
-            res.render("products", {prods, hasAny: true});
-            }
+            res.json(prods);
+            // if (prods.length == 0) {
+            //     res.render("products", {prods, });
+            // } else{
+            // res.render("products", {prods, hasAny: true});
+            // }
             
        
         } catch (error) {
             const prods = await ProductDao.getAll()
-            
-            res.render("products", {prods, hasAny: false});
+            res.json(prods);
+            //res.render("products", {prods, hasAny: false});
           
         
         
@@ -30,10 +30,9 @@ const showAll = async(req, res) => {
     
     const newProduct= (req, res) => {
         try {
-            const {title, price, thumbnail, descrip, stock} = req.body;
-            let objeto = {title, price, thumbnail, descrip, stock};
-           ProductDao.saveObject(objeto);
-      
+    
+           ProductDao.saveObject(req.body);
+          
             res.redirect("/api/productos/Listado");
         } catch (error) {
             console.log(error);
@@ -57,14 +56,7 @@ const showAll = async(req, res) => {
     const updateById= async(req, res) => {
          try {
             const {id} = req.params;
-            const newProd = {
-                title: req.body.title,
-                price: req.body.price,
-                thumbnail: req.body.thumbnail,
-                descrip : req.body.descrip,
-                stock : req.body.stock
-            
-            }
+            const newProd = req.body;
             await ProductDao.updateById(id, newProd);
 
             res.json(newProd);

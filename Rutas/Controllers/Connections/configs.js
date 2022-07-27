@@ -2,7 +2,7 @@
 
 export default  {
     mongodb : {
-        connectionString: "mongodb+srv://cluster0.vor56.mongodb.net/E-commerce" 
+        connectionString: "mongodb+srv://Andres:Andres@cluster0.vor56.mongodb.net/E-commerce" 
     },
     firebase: {
         "type": "service_account",

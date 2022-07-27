@@ -9,7 +9,7 @@ const ADMIN= true
 const checking = checkAdmin(ADMIN)
 
 
-router.post("/addcart", saveCart)
+router.get("/nuevoCarro", saveCart)
 //router.post("/agregar",checking, newProduct)
 router.get("/:id/Listado" , getAllFromCarro)
 router.post('/agregar/:id',checking, addProductById) 
