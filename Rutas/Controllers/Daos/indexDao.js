@@ -12,8 +12,8 @@ switch (process.env.DATABASE) {
        
         break;
     case "firebase":
-        const { default: ProductDaoFirebase } = await import("./firebase/productos.daos.js");
-        const { default: CartDaoFirebase } = await import("./firebase/carritos.daos.js");
+        const { default: ProductDaoFirebase } = await import("./Firebase/productos.dao.js");
+        const { default: CartDaoFirebase } = await import("./Firebase/carritos.dao.js");
         ProductDao = new ProductDaoFirebase;
         CarroDao = new CartDaoFirebase;
         break;

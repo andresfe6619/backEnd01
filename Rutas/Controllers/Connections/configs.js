@@ -1,19 +1,23 @@
 
 
+
+
+
 export default  {
     mongodb : {
         connectionString: "mongodb+srv://Andres:Andres@cluster0.vor56.mongodb.net/E-commerce" 
     },
-    firebase: {
-        "type": "service_account",
-        "project_id": "ecommerce-react-felipe-vasquez",
-        "private_key_id": "7570345741b2d18f635c07d6222f5fdecc6e2ba4",
-        "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCH+e9UR70rGmmb\nRtG7ZyJfWRlnnfIb9GHKtVNkJ9T13Tjd63+W8n4cslLOgh5veBdhJwnQTx+nKy7o\nvhxD8MqDkJOv7V3nPSUwC+ktFGWSHZQcgifNBG/lRq1ylDub84N7IZFrhjV7nXIi\nZV24PKIke4AdwdA5eZB1/j8EQsnx3gGvVyC9MShKzP9hO4oZGqFxWJSQAyvGL4S2\nEhaWuBXn4C4YJhHyudbLl23aGWoxdTsFuFdcJmlUoy/x3/Ptf1oZ3Ezh8eFOEzQA\n28+NROKP6hwMcrnkh1jLFhdExgrdknX/famPfK2rgPthsNLkMpIV3XGo7prdak3Z\nzVhXTle5AgMBAAECggEAPCNdJyBHWN3ooSU0MzcM67CjXMFtR9HQwm9pv10igc7i\njLvQBTmgbx6rIuxHe7NYW76BR6EG9c9Sgts58w528rMprmBD7LaNUO+jpC1mMrZk\nQCuMYM86keOtaISIzJNprjaNc0m7M73Rsca1KXuflpUMd5y1dAYAzz6wLjk/yXlq\nqn/hqNtcTpv0pxNAIdTjn8SxGAJa6IPs4d5lgsAhkuYUUiPrZ6aFSb7QvzFwmPW4\n0zmfMFpd9/cAVddWiyghBNef2g3aIPOaufzd0TRAPxoFKBwo1DxPKVWxmL83FZ4i\n05iSwLSbz0T4oShcQ5s9XK0W76H0iAvBUQLv5W0TxQKBgQC6mt8FlzN8isPYTXZr\nAaVW1g6shQCvkIEr32v5sJPu+jNJuk3Vk28tFYFWVpvcUoEYy2l52I1FH3Rjhwvz\n2MaUZNpb/NwU4b2780ZkyF8RcYKXXEuWdN4iIV9HMFMfHMAriEBddGLZ+jAWgaTF\niH4IL5pKmhSJWDSgRU1LWx4oKwKBgQC6ix/Txy+2YmLXQsIHQwJj0QwXZRN4XCoJ\nr7/mQM5zZ+FPF6dGPdYLMH1+ju0rABAEymjYiG7uAr4df3Q/Xie6pkLTH9/k7yPz\nLUkt/FGixfl3ppN3IE2IQe3CHML6H+XMFHvMo0NVYFF4EhuaFMvWkne5mEEusWT4\nlbU9IEAJqwKBgDOv/ECHLiq8IR1D754aOZsA9dWRjawTocPuQfFKmN9kDFrKsQ6M\npQne4BFzMf7oF3wvs8qdUhwoZ0u+N3BWxkKKYPWD584c7TonW4NFARhK0bptRT6q\npnDbv5FvcEa45v3n4rRALbVlGHbTeDmC4i4QSXOKlE+q0ADo0U0jMwo7AoGAFjus\nsG4GFsPFKgjP3VO0PjdVLJikaGz7qanjwkqpEIIqDWYxTqLiFvVRj7rzM3PPdPK2\n6k/ggMec5yEgtsi/DXTxc/5RjhSegUY9eZigFjloUUVuP/1+oCXTc5Y/+tXAasFq\nO+qdhNh0/U2TMpsV7F4KnPkzk6Aa+7HEJyPn3f8CgYBRluaGVulWa6ud1AroJMVs\nNw5r2x/AtowQmiX5FTgVmaHLM8QYd6uKmCTLHcwr4k0wdo3HgiA251bqwVXQGRYJ\nfIZQgkbEsssZGjjXfXBHjiLJWxocWSU0+1n6lf7X2N+2EH7uzBokZAl3MosiL/pn\nMt/SSMTqjKPZTaUjL7OjgQ==\n-----END PRIVATE KEY-----\n",
-        "client_email": "firebase-adminsdk-8j9xs@ecommerce-react-felipe-vasquez.iam.gserviceaccount.com",
-        "client_id": "110504364120853104746",
-        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-        "token_uri": "https://oauth2.googleapis.com/token",
-        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-8j9xs%40ecommerce-react-felipe-vasquez.iam.gserviceaccount.com"
+    firebase : {
+            "type": "service_account",
+            "project_id": "ecommerce-react-felipe-vasquez",
+            "private_key_id": "90dbdeee8ededd1fd9e4d2b4c83ec39812c41755",
+            "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC7JOqF+WF/mbeT\nB0vp2xx6RaVzzgUST7HLsq8JPl1v2AEhJGsWUBeARwpFJni51tmGAMYGOI057HUG\n7wNdvLXeijX9yeKCyeiXaGFxfl1k7acxg/TrO1AC/8RkCAXEBeJxggTMasRhFgRk\ndyoDTprRsogBvsskHAeEPoXFkt8L0GeZr50fdyF8gFrjwSsSnbY3+RavF2lQfFun\n7lzwXQ/sPufH+p9QToJcYohgokqYrer+/0nJxj5h3SBe15mDl/EJWUOg8Xvq84Jz\n2mQbUlzwszoIZP3CcFSJ6kgtvTX39UYKpgckl5Vlvdc/1F+NRqqXOuNyx7uYuvCk\n2lrr2klRAgMBAAECggEACSUYKrzRdV1LGa2xGXfiD92IZLzMBaWMUCJmqEJ6aWU6\nRObVLs1yIIwYJeHn41jq3z/5bUNlL0/tNg4G8ZUvo/TIB6NOZMq+CWwJ2vRsVurA\nEUzb8oS+966M58B2m6oX8ykB2AVdnErpowkpreiw6w9Y0xECNz0BZwZxHgL70EVk\n7jkWVRHuczmfmGCfqWhsOpJ2iUGZx1r03R/XikOoMQQu69B2/L+bEt/rv1lduhda\nc/wLAi+bvwpWX6Cucjmr6aYOFOkYhhppaOG3k9bXoc26BTWo7SAqEUXPU0VkBNRk\n5rkRuihZCVzXEfOZW3VoCBrzlvWLV7Pg2DG6iMDPmwKBgQDcMIcZSU6b7SdZwrJ4\nwcCBQHHvaFCsdoZQ+zoGvvxq5YFStpYLY6Nk1dFgAu5W17tfkGbJJJAXJ4Nw22Zg\nhx/xPbhRpMA8MlITtxrSBEGO37J9H9pagMPC80HRjbHPTkL6AGrj46Up2NQDaO5M\nly+IhFkfUtejDRf14tvQN6O7nwKBgQDZlJAcEKbIDjPjRbsy2lmULEV539iFYNY/\nvydQTxk5ViskRrhogFh5YB4T6597aT/hdTDdMdowxMFpVMEdQV2RnarMk71iemeE\nTAa35WQP7FzhSPjH4pTFl8l4QeabSL064k33jLjFBhGP1EmIGuul2ZFpzW5+NM6K\nrfbPQHnVDwKBgCUC4zKU5+m9y0eDOoyhxMH1GzGqzySuJ5WlJPPNVpCBU2Ob3Uy8\nytJAPpls5LMkQBKoKx7UToQV2Do4JtVC4VOjlD/k+YskyjcWKCP1Iy/o2g++Mu3T\nhxRV31JiBulZtlhfiZgUw8Zs8/Y+xQ+KuiqwVGq3ehemM8jZASnWsGbxAoGAWcxe\nzbZxnw99isc0w4AqiGTdJ7ei/SlCQ3z5FMQQfQF7PLWTVk3iNfXddAtC/wQpQTvE\ntwXkL0yFJpu8N/7KR1bzLwuqlgI+xvM5spwR+CBtFO2w/44cKJDErcVFD8Gtl6fe\n1dRWTbp7dQkAcBPsPb7VrP0EJUJWHBZATrkljzECgYEAqvq/tI/hqf4sO/62oLaj\nsGzeI13sItGxUihDy/SMPpVkzwKi1Q3PEanBaqmm/j7DuYbl0RczshpXTurbCY0n\nkFk1p71DUwNa9D5fwbusc6lCQF7p/pePw0bXs4IBfppEgve3PDvImgQa1KPiJZcp\nGj/EnMClC4owow1kvLh32bk=\n-----END PRIVATE KEY-----\n",
+            "client_email": "firebase-adminsdk-8j9xs@ecommerce-react-felipe-vasquez.iam.gserviceaccount.com",
+            "client_id": "110504364120853104746",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token",
+            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+            "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-8j9xs%40ecommerce-react-felipe-vasquez.iam.gserviceaccount.com"
+          }
 
-    }, }
+    }

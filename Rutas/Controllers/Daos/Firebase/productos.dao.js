@@ -1,4 +1,4 @@
-import ContenedorFirebase from "./firebaseContenedor";
+import ContenedorFirebase from "./firebaseContenedor.js";
 
 class ProductosFirebase extends ContenedorFirebase {
     constructor() {

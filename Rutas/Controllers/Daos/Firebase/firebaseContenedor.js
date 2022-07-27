@@ -1,9 +1,10 @@
 import admin from 'firebase-admin';
-import configs from "../../Connections/configs";
+import configs from "../../Connections/configs.js";
 
 
 admin.initializeApp({
-    admin: admin.credential.cert(configs.firebase),
+    credential: admin.credential.cert(configs.firebase),
+    
 });
 
 
@@ -35,7 +36,7 @@ class ContenedorFirebase {
         async saveObject (elemento) {
             elemento.timestamp = new Date().toLocaleString("fr-FR");
             delete elemento.administrador;
-            const newElement = this.coleccion.doc();
+            const newElement = this.collection.doc();
             await newElement.create(elemento);
             return;
         }
@@ -61,10 +62,17 @@ class ContenedorFirebase {
         }
     
         async saveInCart ( idCart, elemento) {
-            await this.collection.doc(idCart).update({
-                productos: admin.firestore.FieldValue.arrayUnion(elemento)
+         
+            const producto=  this.collection.doc(idCart);
+            
+            const productos = await producto.update({
+           
+            productos: admin.firestore.FieldValue.arrayUnion(elemento.id= 1, elemento) , 
+            
             })
-            let resultado = "OK";
+            
+          console.log(Number( productos.lenght + 1))
+            let resultado = `el producto ${elemento.title} se ha añadido al carrito con ID ${idCart}`;
             return resultado;
         }
     
