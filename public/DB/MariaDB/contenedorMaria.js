@@ -1,5 +1,6 @@
-const fs = require("fs");
-const database = require("../database").databaseConnection;
+import fs from "fs";
+import {databaseConnection} from "../database.js"
+
 class Contenedor {
     constructor(table) {
         this.table = [table]
@@ -77,4 +78,4 @@ class Contenedor {
         }
     }
 }
-module.exports = Contenedor;
+export default  Contenedor;

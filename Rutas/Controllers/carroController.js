@@ -1,9 +1,9 @@
-const Contenedor = require('./carroModelo.js')
+import  Contenedor from './carroModelo.js'
 
 const Objeto5 = new Contenedor([]);
 
-const fs = require('fs/promises');
-const { timeStamp } = require('console');
+import fs   from 'fs/promises';
+import { timeStamp }  from 'console';
 
 
 const saveCart = async(req, res)=>{
@@ -143,4 +143,4 @@ const deleteByIdCart = async(req, res) => {
 
 
 
- module.exports= { getAllFromCarro, newProduct, filterId, addProductById, deleteById, deleteByIdCart, saveCart };
+ export { getAllFromCarro, newProduct, filterId, addProductById, deleteById, deleteByIdCart, saveCart };

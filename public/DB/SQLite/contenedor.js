@@ -1,6 +1,5 @@
 
-const Contenedor = require("./contenedorSQL");
+import Contenedor from "./contenedorSQL.js";
 const ContenedorMensajes = new Contenedor("mensajes");
 
-
-module.exports = {ContenedorMensajes}
+export {ContenedorMensajes}

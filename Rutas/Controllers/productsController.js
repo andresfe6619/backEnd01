@@ -1,9 +1,9 @@
-const express = require('express')
-const  {Router} = require("express");
+import express  from 'express'
+import {Router}  from "express";
 const router = new Router();
-const fs = require('fs'); 
-const bodyParser = require('body-parser');
-const { append } = require("express/lib/response");
+import fs from 'fs'; 
+import bodyParser from 'body-parser';
+
 
 class Contenedor {
     constructor( id) {
@@ -223,4 +223,4 @@ const deleteById= async(req, res) => {
 
 }
  
- module.exports= { showAll, newProduct, filterId, updateById, deleteById };
+ export  { showAll, newProduct, filterId, updateById, deleteById };

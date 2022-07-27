@@ -1,6 +1,6 @@
 // contenedor principal de productos 
-const Contenedor = require("./contenedorMaria");
-const contenedorProductos = new Contenedor("productos");
+import Contenedor from "./contenedorMaria.js";
+const  contenedorProductos = new Contenedor("productos");
 
 
 const getAllProducts = (req, res)=>{
@@ -23,4 +23,4 @@ const deleteProductById = (req, res)=>{
     res.json(contenedorProductos.deleteById(Number(req.params.id)));
 }
 
-module.exports = {contenedorProductos, getAllProducts, getProductById, postProduct, putProduct, deleteProductById}
+export {contenedorProductos, getAllProducts, getProductById, postProduct, putProduct, deleteProductById}

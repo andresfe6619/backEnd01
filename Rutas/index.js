@@ -1,12 +1,12 @@
-const express = require('express');
+import express from "express";
 
-const moment = require('moment');
-const fs = require('fs'); 
+import moment from 'moment';
+import fs from 'fs'; 
 
-const {Router} = require('express');
-const router = Router();
-const carro = require('./carro.js');
-const Productos = require("./Productos.js");
+import {Router} from 'express';
+const  router = Router();
+import carro from './carro.js';
+import Productos from "./Productos.js";
 
 
 
@@ -37,4 +37,4 @@ router.get("/fyh", (req, res) => {
 
 router.use("/productos", Productos )
 router.use("/carro", carro )
-module.exports= router;
+export default router;

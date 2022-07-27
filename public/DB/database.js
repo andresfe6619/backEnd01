@@ -1,4 +1,4 @@
-const knex = require('knex')
+import knex from 'knex'
 const config = {
   client: "mysql",
   connection: {
@@ -19,5 +19,5 @@ const configSQLite3 = {
 
 const databaseConnection = knex(config)
 const databaseConnectionSQLite3 = knex(configSQLite3)
-module.exports = {databaseConnection, databaseConnectionSQLite3}
+export   {databaseConnection, databaseConnectionSQLite3}
 

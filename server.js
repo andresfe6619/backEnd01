@@ -1,21 +1,22 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const { Server : IOServer }= require("socket.io")
-const rutas = require('./Rutas/index.js');
-const { engine } = require('express-handlebars')
-const path = require('path');
-const  fs  = require('fs');
-require("dotenv").config({path: ".env"});
+import  { Server } from "socket.io"
+import rutas from './Rutas/index.js';
+import { engine }  from 'express-handlebars'
+import path from 'path';
+import   fs  from 'fs' ;
+import dotenv from "dotenv";
+dotenv.config({path: ".env"});
 const puerto= process.env.PORT;
 
-const {contenedorProductos} = require('./public/DB/MariaDB/contenedor.js');
+import{contenedorProductos}  from './public/DB/MariaDB/contenedor.js';
 const ArrayProductos = [];
-const {ContenedorMensajes} = require('./public/DB/SQLite/contenedor.js');
+import {ContenedorMensajes} from './public/DB/SQLite/contenedor.js';
 const expressServer= app.listen(puerto, () => {
     console.log('Servidor corriendo en el puerto '+puerto);
 })
-const io = new IOServer(expressServer);
-app.use(express.static(path.join(__dirname, './public')))
+const io = new Server(expressServer);
+app.use(express.static(path.join('./public')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/api", rutas)
@@ -53,7 +54,7 @@ socket.on ("client: new product", async product => {
 socket.on('client:message', async messageInfo => {
   await ContenedorMensajes.saveSQL(messageInfo)
       
-      io.emit('server:mensajes', messageInfo)
+      io.emit('server:mensajes', messages)
     
  
     })  
@@ -64,10 +65,10 @@ socket.on('client:message', async messageInfo => {
 //Handlebars
 app.engine('hbs', engine({
     extname: '.hbs',
-    defaultLayout: path.join(__dirname, './views/layouts/main.hbs'),
-    layoutsDir: path.join(__dirname, './views/layout'),
-    partialsDir: path.join(__dirname, './views/partials')
+    defaultLayout: path.join( './views/layouts/main.hbs'),
+    layoutsDir: path.join( './views/layout'),
+    partialsDir: path.join( './views/partials')
 }))
 
-app.set('views', path.join(__dirname, './views'))
+app.set('views', path.join( './views'))
 app.set('view engine', 'hbs')

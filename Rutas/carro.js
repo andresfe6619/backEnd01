@@ -1,18 +1,19 @@
-const express = require('express')
-const  {Router} = require("express");
+import express  from 'express'
+import  {Router} from "express";
 const router = new Router();
-const {getAllFromCarro, newProduct,  addProductById, deleteById, deleteByIdCart, saveCart} = require("./controllers/carroController.js");
-const checkAdmin = require("./Controllers/chekAdmin.js");
+//import {getAllFromCarro, newProduct,  addProductById, deleteById, deleteByIdCart, saveCart} from "./controllers/carroController.js";
+import checkAdmin from "./Controllers/chekAdmin.js";
+import { getAllFromCarro, addProductById, deleteById, deleteByIdCart, saveCart } from "./controllers/route-controller-dao/CartController.js";
 const ADMIN= true
 
 const checking = checkAdmin(ADMIN)
 
 
 router.post("/addcart", saveCart)
-router.post("/agregar",checking, newProduct)
+//router.post("/agregar",checking, newProduct)
 router.get("/:id/Listado" , getAllFromCarro)
 router.post('/agregar/:id',checking, addProductById) 
 router.delete('/:id',checking, deleteById)
 router.delete("/:id/Listado/:id_prod",checking, deleteByIdCart)
 
-module.exports = router;
+export default  router;

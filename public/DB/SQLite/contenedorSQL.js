@@ -1,4 +1,4 @@
-const database = require('../database').databaseConnectionSQLite3
+import {databaseConnectionSQLite3} from '../database.js'
 
 class Contenedor {
     constructor(table) {
@@ -31,4 +31,4 @@ class Contenedor {
 
 }
 
-module.exports = Contenedor;
+export default  Contenedor;

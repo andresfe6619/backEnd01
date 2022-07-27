@@ -1,4 +1,4 @@
-const  {Router} = require("express");
+import  {Router} from "express";
 const router = new Router();
 
 const checkAdmin = (admin)=>{
@@ -14,4 +14,4 @@ const checkAdmin = (admin)=>{
 
 
 
-module.exports = checkAdmin;
+export default checkAdmin;

@@ -1,5 +1,5 @@
-const database = require('../database').databaseConnection
-
+import database  from '../database'
+database.databaseConnection
 const createProductsTable = async () => {
     try{
         await database.schema.createTable("productos", productTable=>{

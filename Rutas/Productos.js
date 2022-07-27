@@ -1,8 +1,8 @@
-const express = require('express')
-const  {Router} = require("express");
+import express  from 'express'
+import {Router} from "express";
 const router = new Router();
-const {showAll, newProduct, filterId, updateById, deleteById} = require("./controllers/productsController.js");
-const checkAdmin = require("./Controllers/chekAdmin.js");
+import {showAll, newProduct, filterId, updateById, deleteById}  from"./controllers/route-controller-dao/productController.js";
+import checkAdmin from "./Controllers/chekAdmin.js";
 const ADMIN= true
 
 const checking = checkAdmin(ADMIN)
@@ -16,4 +16,4 @@ router.put('/Listado/:id', updateById)
 router.delete('/Listado/:id', deleteById)
 
 
-module.exports = router;
+export default router;
