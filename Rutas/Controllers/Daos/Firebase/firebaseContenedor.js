@@ -62,17 +62,19 @@ class ContenedorFirebase {
         }
     
         async saveInCart ( idCart, elemento) {
-         
+            const date = new Date()
+            const [month, day, year, hour, milisecond]= [date.getMonth(), date.getDate(), date.getFullYear(), date.getHours(),date.getMilliseconds()];
+            const id = `${month}${day}${year}${hour}${milisecond}`
+            elemento.id = id;
             const producto=  this.collection.doc(idCart);
-            
+          
             const productos = await producto.update({
            
-            productos: admin.firestore.FieldValue.arrayUnion(elemento.id= 1, elemento) , 
+            productos: admin.firestore.FieldValue.arrayUnion(elemento) , 
             
             })
-            
-          console.log(Number( productos.lenght + 1))
-            let resultado = `el producto ${elemento.title} se ha añadido al carrito con ID ${idCart}`;
+        
+            let resultado = `el producto ${elemento.title} de id : ${elemento.id} se ha añadido al carrito con ID ${idCart}`;
             return resultado;
         }
     

@@ -45,7 +45,7 @@ const addProductById = async (req, res) => {
 const deleteByIdCart = async (req, res) => {
     try {
         let resultado = await CarroDao.eraseFromCart(req.params.id, req.params.id_prod);
-        console.log("Resultado: ", resultado);
+        console.log(resultado);
         res.send(resultado);
     } catch (error) {
         console.log('Ocurrio el siguiente error al querer eliminar el producto del carrito', error);
