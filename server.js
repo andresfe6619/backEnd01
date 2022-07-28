@@ -1,5 +1,8 @@
 import express from 'express';
 const app = express();
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import  { Server } from "socket.io"
 import rutas from './Rutas/index.js';
 import { engine }  from 'express-handlebars'
@@ -16,7 +19,7 @@ const expressServer= app.listen(puerto, () => {
     console.log('Servidor corriendo en el puerto '+puerto);
 })
 const io = new Server(expressServer);
-app.use(express.static(path.join('./public')))
+app.use(express.static(path.join(__dirname, './public')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/api", rutas)
@@ -65,10 +68,10 @@ socket.on('client:message', async messageInfo => {
 //Handlebars
 app.engine('hbs', engine({
     extname: '.hbs',
-    defaultLayout: path.join( './views/layouts/main.hbs'),
-    layoutsDir: path.join( './views/layout'),
-    partialsDir: path.join( './views/partials')
+    defaultLayout: path.join(__dirname, './views/layouts/main.hbs'),
+    layoutsDir: path.join(__dirname,  './views/layout'),
+    partialsDir: path.join(__dirname, './views/partials')
 }))
 
-app.set('views', path.join( './views'))
+app.set('views', path.join(__dirname, './views'))
 app.set('view engine', 'hbs')
