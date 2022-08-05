@@ -22,17 +22,17 @@ function normalizeM(mensajes) {
     "mensajes",
     {
       mensajes: [mensaje],
-    }
-  );
+    },
+   
+    );
 
-  const normalizedPost = normalize(
-    { id: "mensajes", mensajes },
-    schemaMensajes
-  );
+    const normalizedPost = normalize(
+        { id: "mensajes", mensajes },
+        schemaMensajes)
 
    
-   print(normalizedPost);
-  return normalizedPost;}
+   
+  return normalizedPost};
 
 function denormalizeM(recibido) {
     const author = new schema.Entity(
@@ -44,7 +44,7 @@ function denormalizeM(recibido) {
     const mensaje = new schema.Entity(
         "mensaje",
         { author: author },
-        
+       
       );
     
       const schemaMensajes = new schema.Entity(
@@ -66,8 +66,11 @@ function denormalizeM(recibido) {
 
    
     const mensajesDenormalizados = denormalized.mensajes.map(mensaje => mensaje._doc)
+print (mensajesDenormalizados);
 
-    return { mensajesDenormalizados };
+return { mensajesDenormalizados };
+
+   return {denormalized};
 }
 
 export  {normalizeM, denormalizeM};

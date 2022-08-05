@@ -43,13 +43,13 @@ const normalize = normalizeM(messages)
 const denormalize = denormalizeM(normalize)
 const longitudNormalized = JSON.stringify(normalize).length;
 const longitudDenormalized = JSON.stringify(denormalize).length;
-const Optimization =  ((longitudNormalized * 100) / longitudDenormalized).toFixed(2);   
+const Optimization = (100- (longitudNormalized * 100) / nos).toFixed();   
 console.log (longitudNormalized)
 console.log (longitudDenormalized)
 console.log (nos)
 //console.log(`normalizados: ${JSON.stringify(normalize)}`)
 socket.emit("server: productos", products)
-socket.emit('server:mensajes', normalize)
+socket.emit('server:mensajes', messages)
 socket.emit("server:porcentajes", Optimization)
 
 socket.on ("client: new product", async product => {
@@ -58,7 +58,7 @@ socket.on ("client: new product", async product => {
   io.emit("server: productos", products)})
     
 socket.on('client:message', async author12 => {
-const message = {author: {id : author12.id ,nombre: author12.nombre , apellido: author12.apellido , edad : author12.edad, alias: author12.alias , avatar: author12.avatar}, Message: author12.Message}
+  const message = {author: {id : author12.id , nombre: author12.nombre , apellido: author12.apellido , edad : author12.edad, alias: author12.alias , avatar: author12.avatar}, Message: author12.Message}
 console.log(`Mensaje nuevo : ${message}`)
 
 await chat.save(message) 
