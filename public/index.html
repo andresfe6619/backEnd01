@@ -48,18 +48,28 @@
        
         </tbody>
       </table> 
-   
+ <h5>Porcentaje de compresion </h5>
+ <div id="porcentaje"></div>  
       <form id="messageForm">
-        <input id="Email" type="email" placeholder="Email" required>
+        <input id="Emailinput" type="email" placeholder="Email" required>
+        <input id="nombreinput" type="text" placeholder="nombre" required>
+        <input id="apellidoinput" type="text" placeholder="apellido" required>
+        <input id="edadinput" type="number" placeholder="edad" required>
+        <input id="aliasinput" type="text" placeholder="alias" required>
+        <input id="avatarinput" type="text" placeholder="avatar" required>
         <input id="messageInput" type="text" placeholder="Mensaje" required>
         <input type="submit" value="Enviar">
-    </form>
+    
+      </form>
       <div id="messagesPool"></div>
 
 
  <script src=" https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" ></script>
- <script src="/socket.io/socket.io.js"></script>     
+<script src="/socket.io/socket.io.js"></script>     
 <script src="/clientSocket.js"></script>
+
+
+
 
 
 </body>

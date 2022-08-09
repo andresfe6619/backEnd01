@@ -16,8 +16,10 @@ const configSQLite3 = {
 }
 
 
+const mongoConnection = "mongodb+srv://Andres:Andres@cluster0.vor56.mongodb.net/E-commerce"
+
 
 const databaseConnection = knex(config)
 const databaseConnectionSQLite3 = knex(configSQLite3)
-export   {databaseConnection, databaseConnectionSQLite3}
+export   {databaseConnection, databaseConnectionSQLite3, mongoConnection}
 

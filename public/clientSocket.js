@@ -48,23 +48,33 @@ socket.on("server: productos", renderProducts)
 //CHAT
 
 
-const messageForm = document.querySelector('#messageForm')
-const Email = document.querySelector('#Email')
-const messageInput = document.querySelector('#messageInput')
-const messagesPool = document.querySelector('#messagesPool')
 
-function sendMessage(messageInfo) {
-    socket.emit('client:message', messageInfo)
+
+function sendMessage(author12) {
+   
+    socket.emit('client:message', author12)
 }
+const messageForm = document.querySelector('#messageForm')
+const Email1 = document.querySelector('#Emailinput')
+const nombre2= document.querySelector('#nombreinput')
+const apellido3 = document.querySelector('#apellidoinput')
+const edad4 = document.querySelector('#edadinput')
+const alias5 = document.querySelector("#aliasinput")
+const avatar6 = document.querySelector('#avatarinput')
+const messageInput = document.querySelector('#messageInput')
+
+const messagesPool = document.querySelector('#messagesPool')
 const fecha = Date()
 console.log(fecha)
 function renderMessages(messagesInfo) {
         
-        const html = messagesInfo.map(msgInfo => {
+        const html = messagesInfo.map(author1 => {
             return(`<div>
-                <strong id="EmailShow">${msgInfo.Email}</strong>:
-                <em id="Date"> ${msgInfo.Date} </em>
-                <em id="Message">${msgInfo.Message}</em> </div>
+                <strong id="EmailShow">${author1.author.id}</strong>:
+                <p id="Date">${fecha}</p>
+                <img id="avatar1" src=${author1.author.avatar}/>
+                <em id="Message">${author1.Message}</em> </div>
+                
                 `)
             }).join(" ");
        
@@ -74,12 +84,23 @@ function renderMessages(messagesInfo) {
 function submitHandler2 (event) {
     event.preventDefault()
     
-    const messageInfo = { Email: Email.value, Message: messageInput.value,  Date: fecha }
+    const author1 = {id : Email1.value ,nombre: nombre2.value , apellido: apellido3.value , edad : edad4.value, alias: alias5.value , avatar: avatar6.value, Message : messageInput.value}
 
-    sendMessage(messageInfo)
-}
+    sendMessage(author1)
+}  
 
 
 messageForm.addEventListener('submit', submitHandler2)
 
 socket.on('server:mensajes', renderMessages)
+
+
+
+// porcentajes
+
+    socket.on("server:porcentajes", Number => {
+        console.log(Number)
+        document.querySelector("#porcentaje").innerHTML = `${Number}%`
+       
+    })
+    

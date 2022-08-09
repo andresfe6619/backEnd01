@@ -8,7 +8,7 @@ class Contenedor {
 
     async save(objeto) {
         try {
-            const id = await database("productos").insert(objeto)
+            const id = await databaseConnection("productos").insert(objeto)
             objeto.id = id[0];
             this.table.push(objeto);
             console.log("Producto cargado con ID : ", objeto.id);
@@ -20,7 +20,7 @@ class Contenedor {
 
     async saveById(id, objeto) {
         try {
-            const rid = await database.from(this.table).where('id', '=', id).update(objeto)
+            const rid = await databaseConnection.from(this.table).where('id', '=', id).update(objeto)
             if (rid === 0) {
                 return { error: `Producto de ID ${id} no encontrado` }
             } else {
@@ -34,7 +34,7 @@ class Contenedor {
 
     async getById(id) {
         try {
-            const product = await database.from(this.table).where({id})
+            const product = await databaseConnection.from(this.table).where({id})
             
             if (product[0]) {
                 return product[0]
@@ -49,7 +49,7 @@ class Contenedor {
 
     async getAll() {
         try {
-            const productos = await database.from(this.table).select("*")
+            const productos = await databaseConnection.from(this.table).select("*")
             return productos;
         } catch (err) {
             /* if no table */
@@ -66,7 +66,7 @@ class Contenedor {
 
     async deleteById(id) {
         try {
-            const rid = await database(this.table).where({id}).del()
+            const rid = await databaseConnection(this.table).where({id}).del()
             if (rid === 0) {
                 return { error: `Producto de ID ${id} no encontrado` }
             } else {

@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.6",
+        
+    "express-session": "^1.17.3",
     "@faker-js/faker": "^7.3.0",
     "admin": "^1.4.1",
     "body-parser": "^1.20.0",
@@ -38,5 +42,6 @@
   },
   "homepage": "https://github.com/andresfe6619/backEnd01#readme",
   "keywords": [],
+  "devDependencies": {},
   "description": ""
 }
