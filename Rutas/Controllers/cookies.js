@@ -1,5 +1,4 @@
-import session from "express-session"
-import cookieParser from "cookie-parser";
+
 const newUser =  async (req, res) => {
     try {
         
@@ -11,9 +10,9 @@ const newUser =  async (req, res) => {
 }
 
 const result = async (req, res) => {
- 
+ req.session.user = req.body;
     if (req.session.user) {
-    res.render("userForm", {welcome: req.session.user, user: true} );}
+    res.render("userForm", {welcome: req.session.user,message: "bienvenido", user: true} );}
     
     else {
         res.render("userForm", {welcome: "", user: false} );
@@ -21,28 +20,40 @@ const result = async (req, res) => {
 }
 
 const destroyUser = async (req, res) => {
- 
+    res.render("log-out", {welcome: req.session.user,message: "Hasta luego"} ); 
     req.session.destroy((err)=>{
         if (err) {
-            res.render("userForm", {welcome: "", user: false} );
+           console.log(err)
         } else {
             
-            res.render("log-out", {welcome: req.session.user, user:true} );
+        console.log("exito")
+    
             
-        }
+        }} )
 
- }
- );
+    }
 
+
+const checkCookie = async (req, res, next) => { 
+if (req.session.user) {
+    next()}
+else {
+    res.redirect("/api/users/inicio")
 }
 
 
 
 
+}
+
+
+export {newUser, result, destroyUser, checkCookie}
 
 
 
 
 
 
-export {newUser, result, destroyUser};
+
+
+

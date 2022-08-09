@@ -1,11 +1,11 @@
 {{#if user}}
 <div>
-<h1 > Bienvenido {{welcome.user}} </h1></div>
+<h1 > {{message}} {{welcome.user}} </h1></div>
 
 <a href="/api/users/adios" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >desloguear </a> 
 {{else}}
    <form action="/api/users/inicio" method="POST">
-  <div class="mb-3">rs
+  <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label" > usuario</label>
     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user">
    
