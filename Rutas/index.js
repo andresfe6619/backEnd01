@@ -7,7 +7,7 @@ import {Router} from 'express';
 const  router = Router();
 import carro from './carro.js';
 import Productos from "./Productos.js";
-
+import Users from "./Users.js";
 
 
 router.get('/home', (req, res) => {
@@ -37,4 +37,5 @@ router.get("/fyh", (req, res) => {
 
 router.use("/productos", Productos )
 router.use("/carro", carro )
+router.use("/users", Users )
 export default router;

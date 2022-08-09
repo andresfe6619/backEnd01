@@ -1,0 +1,24 @@
+{{#if user}}
+<div>
+<h1 > Bienvenido {{welcome.user}} </h1></div>
+
+<a href="/api/users/adios" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >desloguear </a> 
+{{else}}
+   <form action="/api/users/inicio" method="POST">
+  <div class="mb-3">rs
+    <label for="exampleInputEmail1" class="form-label" > usuario</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user">
+   
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Email</label>
+    <input type="Email" class="form-control" id="exampleInputPassword1" name="email">
+  </div>
+  
+   </div>
+  
+  <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">Submit</button>
+</form> 
+  
+  {{/if}}
+

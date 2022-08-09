@@ -1,4 +1,7 @@
 import express from 'express';
+import cookieParser from "cookie-parser";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 const app = express();
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -26,11 +29,31 @@ const io = new Server(expressServer);
 app.use(express.static(path.join(__dirname, './public')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+const mongoOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+app.use(cookieParser());
+app.use(
+  session({
+    store: MongoStore.create({
+      mongoUrl:
+      "mongodb+srv://Andres:Andres@cluster0.vor56.mongodb.net/?retryWrites=true&w=majority",
+      mongoOptions,
+    }),
+    secret: "coderhouse",
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: {
+    
+    },
+  })
+);
 app.use("/api", rutas)
 
 app.use((req, res) => {
   res.status(404).json({error: -2, descripcion: `Ruta '${req.path}' Método '${req.method}' - No Implementada`});
 })
+
+
 
 
 io.on("connection", async (socket) => { 
