@@ -11,7 +11,7 @@ const config = {
 }
 const configSQLite3 = {
   client: "sqlite3",
-  connection: { filename: 'public/DB/SQLite/db/ChatDB.sqlite' },
+  connection: { filename: '/DB/SQLite/db/ChatDB.sqlite' },
   useNullAsDefault: true
 }
 
