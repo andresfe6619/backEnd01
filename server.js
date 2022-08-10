@@ -11,14 +11,14 @@ import rutas from './Rutas/index.js';
 import { engine }  from 'express-handlebars'
 import path from 'path';
 import   fs  from 'fs' ;
-import {normalizeM, denormalizeM} from  './public/normalizr.js';
+import {normalizeM, denormalizeM} from  './normalizr.js';
 import dotenv from "dotenv";
 dotenv.config({path: ".env"});
 const puerto= process.env.PORT;
 
-import{contenedorProductos}  from './public/DB/MariaDB/contenedor.js';
+import{contenedorProductos}  from './DB/MariaDB/contenedor.js';
 
-import chatDao from './public/DB/mongoChat/ChatDao.js';
+import chatDao from './DB/mongoChat/ChatDao.js';
 
 const chat = new chatDao();
 

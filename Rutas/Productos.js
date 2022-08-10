@@ -3,7 +3,7 @@ import {Router} from "express";
 const router = new Router();
 import {showAll, newProduct, filterId, updateById, deleteById}  from"./controllers/route-controller-dao/productController.js";
 import test from "./Controllers/productsFaker.js";
-import checkAdmin from "./Controllers/chekAdmin.js";
+import checkAdmin from "./Controllers/middlewares/chekAdmin.js";
 const ADMIN= true
 
 const checking = checkAdmin(ADMIN)
