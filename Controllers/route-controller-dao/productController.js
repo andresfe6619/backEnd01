@@ -1,4 +1,4 @@
-import { ProductDao } from "../Daos/indexDao.js";
+import { ProductDao } from "../../Models/Daos/indexDao.js";
 import bodyParser from 'body-parser';
 import {Router} from 'express';
 const router = new Router();

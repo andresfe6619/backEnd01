@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import configs from "../../Connections/configs.js";
+import configs from "../../../Connections/configs.js";
 
 await mongoose.connect(configs.mongodb.connectionString);
 
