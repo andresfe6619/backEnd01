@@ -1,9 +1,10 @@
 {{#if user}}
 <div>
-<h1 > {{message}} {{welcome.email}} </h1></div>
+<h1 > {{message}} {{welcome}} </h1></div>
 
 <a href="/api/users/registro" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > ir a registro </a> 
 <a href="/api/users/Datos" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > Revisa tus datos </a> 
+<a href="/api/users/logout" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > cerrar sesion </a> 
 {{else}}
    <form action="/api/users/inicio" method="POST">
   <div class="mb-3">
@@ -18,7 +19,8 @@
   
    </div>
   
-  <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">Submit</button>
+  <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">enviar</button>
+  <a href="/api/users/registro" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >  registrarse </a> 
 </form> 
   
   {{/if}}

@@ -3,10 +3,10 @@ function getLogin(req, res) {
     if (req.isAuthenticated()) {
       var user = req.user;
       console.log("user logueado");
-      res.render("login-ok", {
-        usuario: user.username,
-        nombre: user.firstName,
-        apellido: user.lastName,
+      res.render("userForm", {
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
       });
     } else {
@@ -22,7 +22,7 @@ function getLogin(req, res) {
   function postLogin(req, res) {
     var userSes = req.user;
     if (userSes) {
-        res.render("userForm", {welcome: userSes, message: "bienvenido", user: true} );}
+        res.render("userForm", {welcome: userSes.username, message: "bienvenido", user: true} );}
         else {
             res.render("userForm", {welcome: "", user: false} );
         }
@@ -33,7 +33,7 @@ function getLogin(req, res) {
   function postSignup(req, res) {
     var userSes = req.user;
     if (userSes) {
-        res.render("register", {welcome: userSes, message: "has sido registrado", user: true} );}
+        res.render("register", {welcome: userSes.firstName , message: "has sido registrado", user: true} );}
         else {
             res.render("register", {welcome: "", user: false} );
         }
@@ -59,18 +59,19 @@ function getLogin(req, res) {
   }
   
   function getLogout(req, res) {
-    req.logout();
-    res.render("userForm");
-  }
+    req.session.destroy();
+    res.render("logout");
+ 
+}
   
   function failRoute(req, res) {
     res.status(404).render("Error");
   }
  function getDatos(req, res) {
     var userSes = req.user;
-    console.log("user logueado");
+    console.log("usuario logueado");
     if (userSes) {
-        res.render("userForm", {welcome: userSes, message: userSes, user: true} );}
+        res.render("userForm", {welcome:`nombre de usuario: ${userSes.username}` , message:`email : ${userSes.email}, `, user: true} );}
         else {
             res.render("userForm", {welcome: "", user: false} );
         }

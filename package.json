@@ -44,5 +44,8 @@
   },
   "homepage": "https://github.com/andresfe6619/backEnd01#readme",
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "handlebars": "^4.5.0"
+  }
 }
