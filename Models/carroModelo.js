@@ -2,9 +2,8 @@ import express from 'express'
 import  {Router}  from "express";
 const router = new Router();
 import fs from 'fs'; 
-import bodyParser from 'body-parser';
 
-import { stringify } from 'querystring';
+
 
 class Contenedor {
     constructor(  ) {

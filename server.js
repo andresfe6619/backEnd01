@@ -2,6 +2,10 @@ import express from 'express';
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import bcrypt from 'bcrypt';
+import passport from 'passport';
+import {Strategy as LocalStrategy} from 'passport-local';
+import {usersSchema} from "./models/usersModel.js";
 const app = express();
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -10,17 +14,23 @@ import  { Server } from "socket.io"
 import rutas from './Rutas/index.js';
 import { engine }  from 'express-handlebars'
 import path from 'path';
-import   fs  from 'fs' ;
 import {normalizeM, denormalizeM} from  './normalizr.js';
 import dotenv from "dotenv";
 dotenv.config({path: ".env"});
 const puerto= process.env.PORT;
-
 import{contenedorProductos}  from './DB/MariaDB/contenedor.js';
-
 import chatDao from './DB/mongoChat/ChatDao.js';
-
 const chat = new chatDao();
+
+
+function cryptPass(password){
+    const salt = bcrypt.genSaltSync(10);
+    return  bcrypt.hashSync(password, salt);
+}
+
+function comparePass(password, hash){
+    return bcrypt.compareSync(password, hash);
+}
 
 const expressServer= app.listen(puerto, () => {
     console.log('Servidor corriendo en el puerto '+puerto);
@@ -43,16 +53,71 @@ app.use(
     saveUninitialized: false,
     rolling: true,
     cookie: {
+    httpOnly : false,
+    secure : false,
     maxAge: 10000,
     },
   })
 );
+app.use (passport.initialize());
+app.use (passport.session());
+const register = new LocalStrategy(
+  { passReqToCallback: true },
+  async (req, username, password, done) => {
+    try {
+      const existingUser = await usersSchema.findOne({ username });
+
+      if (existingUser) {
+        return done(null, null);
+      }
+
+      const newUser = {
+        username,
+        password: cryptPass(password),
+        email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+      };
+
+      const createdUser = await usersSchema.create(newUser);
+
+      done(null, createdUser);
+    } catch (err) {
+      console.log("Error registrando usuario", err);
+      done("Error en registro", null);
+    }
+  }
+);
+const login = new LocalStrategy(async (username, password, done) => {
+  try {
+    const user = await usersSchema.findOne({ username });
+
+    if (!user || !comparePass(password, user.password)) {
+      return done(null, null);
+    }
+
+    done(null, user);
+  } catch (err) {
+    console.log("Error login", err);
+    done("Error login", null);
+  }
+});
+passport.use("register", register);
+passport.use("login", login);
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser((id, done) => {
+  usersSchema.findById(id, done);
+});
+
+
+
 app.use("/api", rutas)
-
-app.use((req, res) => {
-  res.status(404).json({error: -2, descripcion: `Ruta '${req.path}' Método '${req.method}' - No Implementada`});
-})
-
+ app.use((req, res) => {
+   res.status(404).json({error: -2, descripcion: `Ruta '${req.path}' Método '${req.method}' - No Implementada`});
+ })
 
 
 

@@ -47,6 +47,13 @@ else {
 }
 
 
+
+
+
+
+
+
+
 export {newUser, result, destroyUser, checkCookie}
 
 
