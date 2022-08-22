@@ -1,3 +1,5 @@
+import args from "./yargs.js" 
+import info from "./Controllers/desafio.js"
 import express from 'express';
 import cookieParser from "cookie-parser";
 import session from "express-session";
@@ -32,8 +34,8 @@ function comparePass(password, hash){
     return bcrypt.compareSync(password, hash);
 }
 
-const expressServer= app.listen(puerto, () => {
-    console.log('Servidor corriendo en el puerto '+puerto);
+const expressServer= app.listen(args, () => {
+    console.log('Servidor corriendo en el puerto '+args);
 })
 const io = new Server(expressServer);
 app.use(express.static(path.join(__dirname, './public')))
