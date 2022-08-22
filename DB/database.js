@@ -1,4 +1,6 @@
 import knex from 'knex'
+import dotenv from "dotenv";
+dotenv.config({path: ".env"});
 const config = {
   client: "mysql",
   connection: {
@@ -16,7 +18,7 @@ const configSQLite3 = {
 }
 
 
-const mongoConnection = "mongodb+srv://Andres:Andres@cluster0.vor56.mongodb.net/E-commerce"
+const mongoConnection = process.env.MONGO
 
 
 const databaseConnection = knex(config)

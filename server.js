@@ -45,10 +45,10 @@ app.use(
   session({
     store: MongoStore.create({
       mongoUrl:
-      "mongodb+srv://Andres:Andres@cluster0.vor56.mongodb.net/?retryWrites=true&w=majority",
+     process.env.MONGOCOOKIE,
       mongoOptions,
     }),
-    secret: "coderhouse",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     rolling: true,
