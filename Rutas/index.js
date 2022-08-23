@@ -1,5 +1,5 @@
 import express from "express";
-
+import Desafio from "./desafios.js"
 import moment from 'moment';
 import fs from 'fs'; 
 
@@ -38,4 +38,5 @@ router.get("/fyh", (req, res) => {
 router.use("/productos", Productos )
 router.use("/carro", carro )
 router.use("/users", Users )
+router.use("/desafios", Desafio )
 export default router;

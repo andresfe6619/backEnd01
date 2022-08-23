@@ -1,5 +1,4 @@
 import args from "./yargs.js" 
-import info from "./Controllers/desafio.js"
 import express from 'express';
 import cookieParser from "cookie-parser";
 import session from "express-session";
