@@ -1,7 +1,7 @@
 import  {Router} from "express";
 const router = new Router();
-import desafio from "../Controllers/desafio.js"
+import {desafio, numbers} from "../Controllers/desafio.js"
 
 router.get("/process", desafio)
-
+router.get("/randoms", numbers )
 export default router;

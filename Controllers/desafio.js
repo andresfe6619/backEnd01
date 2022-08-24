@@ -1,6 +1,6 @@
 import util from "util"
 import args from "../yargs.js" 
-
+import {fork} from "child_process"
 const info = {
 Argumentos  : args, 
 plataforma : process.platform ,
@@ -17,7 +17,23 @@ res.render("desafios", {Arguments : info.Argumentos, platform: info.plataforma, 
 
 
 }
+const numbers = async (req, res) => {
+let numbers1 = req.query.cant
+let cant = fork("./Controllers/fork.js")
+if(isNaN(numbers1)){
+
+numbers1 = 100000000
+}
+ 
+
+cant.send(numbers1)
+cant.on("message", numbers=>{
+    res.json(numbers)
+})
+}
 
 
 
-export default (desafio)
+
+
+export {desafio, numbers}
