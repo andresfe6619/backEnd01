@@ -1,19 +1,21 @@
 import util from "util"
-import args from "../yargs.js" 
+import {port, mode } from "../yargs.js" 
 import {fork} from "child_process"
+import os from "os"
 const info = {
-Argumentos  : args, 
+Argumentos  : port, mode, 
 plataforma : process.platform ,
 node: process.version ,
 memoria : util.inspect(process.memoryUsage(), {showHidden: false, depth: null, color: true }) ,
 path : process.execPath, 
 id : process.pid,
-carpeta: process.cwd()
+carpeta: process.cwd(),
+cpus : os.cpus().length 
 }
 
 
 const desafio = async (req, res) => {
-res.render("desafios", {Arguments : info.Argumentos, platform: info.plataforma, node: info.node,   memory: info.memoria, path : info.path, id: info.id, carpeta: info.carpeta} )
+res.render("desafios", {Arguments : info.Argumentos, platform: info.plataforma, node: info.node,   memory: info.memoria, path : info.path, id: info.id, carpeta: info.carpeta, cpus: info.cpus} )
 
 
 }

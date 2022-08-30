@@ -3,12 +3,15 @@ const xi = yargs(process.argv.slice(2))
 
 const args = xi
 .alias({
-p: "port"
+p: "port",
+m : "mode"
 })
 .default ({
-    port: 8080
+    port: 8080 ,
+    mode : "fork"
 }).argv;
 
-
-
-export default (args.port)
+const port = args.port
+const mode = args.mode
+console.log ( port, mode)
+export  {port, mode}

@@ -1,7 +1,9 @@
-import args from "./yargs.js" 
+import {port, mode} from "./yargs.js" 
 import express from 'express';
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import os from "os"
+import cluster from "cluster"
 import MongoStore from "connect-mongo";
 import bcrypt from 'bcrypt';
 import passport from 'passport';
@@ -24,6 +26,17 @@ import chatDao from './DB/mongoChat/ChatDao.js';
 const chat = new chatDao();
 
 
+if (mode === "cluster" && cluster.isPrimary){
+os.cpus().map(() => {
+  cluster.fork();
+}
+)
+cluster.on("exit", worker=>{
+  console.log(`Worker ${worker.process.pid} died, a new one is being created`)
+   cluster.fork()
+} )
+
+}else{
 function cryptPass(password){
     const salt = bcrypt.genSaltSync(10);
     return  bcrypt.hashSync(password, salt);
@@ -33,9 +46,10 @@ function comparePass(password, hash){
     return bcrypt.compareSync(password, hash);
 }
 
-const expressServer= app.listen(args, () => {
-    console.log('Servidor corriendo en el puerto '+args);
+const expressServer= app.listen(port, () => {
+    console.log('Servidor corriendo en el puerto '+ port);
 })
+
 const io = new Server(expressServer);
 app.use(express.static(path.join(__dirname, './public')))
 app.use(express.json())
@@ -166,3 +180,4 @@ app.engine('hbs', engine({
 
 app.set('views', path.join(__dirname, './views'))
 app.set('view engine', 'hbs')
+}
