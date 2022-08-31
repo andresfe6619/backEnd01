@@ -4,7 +4,7 @@ const xi = yargs(process.argv.slice(2))
 const args = xi
 .alias({
 p: "port",
-m : "mode"
+modes : "mode"
 })
 .default ({
     port: 8080 ,

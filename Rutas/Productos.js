@@ -4,7 +4,7 @@ const router = new Router();
 import {showAll, newProduct, filterId, updateById, deleteById}  from"../Controllers/route-controller-dao/productController.js";
 import test from "../Controllers/productsFaker.js";
 import checkAdmin from "../middlewares/chekAdmin.js";
-const ADMIN= true
+const ADMIN= false
 
 const checking = checkAdmin(ADMIN)
 
