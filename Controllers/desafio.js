@@ -17,7 +17,8 @@ cpus : os.cpus().length
 const desafio = async (req, res) => {
 res.render("desafios", {Arguments : info.Argumentos, platform: info.plataforma, node: info.node,   memory: info.memoria, path : info.path, id: info.id, carpeta: info.carpeta, cpus: info.cpus} )
 
-
+// let longitudNormalized = JSON.stringify(info).length;
+// console.log(longitudNormalized)
 }
 const numbers = async (req, res) => {
 let numbers1 = req.query.cant

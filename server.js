@@ -24,8 +24,9 @@ const puerto= process.env.PORT;
 import{contenedorProductos}  from './DB/MariaDB/contenedor.js';
 import chatDao from './DB/mongoChat/ChatDao.js';
 const chat = new chatDao();
-
-
+import {logger} from "./logs/loggers.js"
+import compression from "compression"
+app.use(compression())
 if (mode === "cluster" && cluster.isPrimary){
 os.cpus().map(() => {
   cluster.fork();
@@ -37,7 +38,19 @@ cluster.on("exit", worker=>{
 } )
 
 }else{
-function cryptPass(password){
+  
+
+app.use((req, res, next)=>{
+    logger.info(`New request: ${req.method} - ${req.path}`)
+    next()
+})
+app.use((req, res) => {
+  logger.warn(`Ruta no encontrada: ${req.method} - ${req.path}`)
+  res.status(404).json({ error404: `Ruta no encontrada ${req.method} ${req.path}` });
+})
+
+
+  function cryptPass(password){
     const salt = bcrypt.genSaltSync(10);
     return  bcrypt.hashSync(password, salt);
 }
@@ -47,7 +60,7 @@ function comparePass(password, hash){
 }
 
 const expressServer= app.listen(port, () => {
-    console.log('Servidor corriendo en el puerto '+ port);
+    logger.info(`Servidor corriendo en el puerto ${port}`);
 })
 
 const io = new Server(expressServer);
@@ -98,7 +111,8 @@ const register = new LocalStrategy(
 
       done(null, createdUser);
     } catch (err) {
-      console.log("Error registrando usuario", err);
+      logger.warn("Error registrando usuario", err);
+    
       done("Error en registro", null);
     }
   }
