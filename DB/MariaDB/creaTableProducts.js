@@ -1,4 +1,5 @@
 import database  from '../database'
+import {logger} from "../../logs/loggers.js"
 database.databaseConnection
 const createProductsTable = async () => {
     try{
@@ -8,10 +9,10 @@ const createProductsTable = async () => {
             productTable.string("thumbnail", 50).notNullable();
             productTable.integer('price').notNullable();
         })
-        console.log("product table created")
+        logger.info("product table created")
         database.destroy();
     } catch(err){
-        console.log("error: ", err);
+        logger.console.error();("error: ", err);
         database.destroy();
     }
         

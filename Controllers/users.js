@@ -1,8 +1,9 @@
+import {logger} from "../logs/loggers.js"
 function getRoot (req, res) {}
 function getLogin(req, res) {
     if (req.isAuthenticated()) {
       var user = req.user;
-      console.log("user logueado");
+      logger.info("user logueado");
       res.render("userForm", {
         username: user.username,
         firstName: user.firstName,
@@ -10,7 +11,7 @@ function getLogin(req, res) {
         email: user.email,
       });
     } else {
-      console.log("user NO logueado");
+      logger.warn("user NO logueado");
       res.render("userForm");
     }
   }
@@ -22,7 +23,8 @@ function getLogin(req, res) {
   function postLogin(req, res) {
     var userSes = req.user;
     if (userSes) {
-        res.render("userForm", {welcome: userSes.username, message: "bienvenido", user: true} );}
+        
+      res.render("userForm", {welcome: userSes.username, message: "bienvenido", user: true} );}
         else {
             res.render("userForm", {welcome: "", user: false} );
         }
@@ -33,7 +35,8 @@ function getLogin(req, res) {
   function postSignup(req, res) {
     var userSes = req.user;
     if (userSes) {
-        res.render("register", {welcome: userSes.firstName , message: "has sido registrado", user: true} );}
+        logger.info("has sido registrado")
+      res.render("register", {welcome: userSes.firstName , message: "has sido registrado", user: true} );}
         else {
             res.render("register", {welcome: "", user: false} );
         }
@@ -41,37 +44,42 @@ function getLogin(req, res) {
  
     function checkAuthentication(req, res, next) {
         if (req.isAuthenticated()) {
+          logger.info("authenticationis is true")
           next();
         } else {
+          logger.warn("Authentication failed")
           res.redirect("/api/users/inicio");
         }
       }
   
   
   function getFaillogin(req, res) {
-    console.log("error en login");
+    logger.error("error en login");
     res.render("fails", { message: "Error logueandose", user: true} );};
   
   
   function getFailsignup(req, res) {
-    console.log("error en signup");
+    logger.error("error en signup");
     res.render("fails", { message: "Error en el sign up", user: false} );
   }
   
   function getLogout(req, res) {
+    logger.warn("logged out")
     req.session.destroy();
     res.render("logout");
  
 }
   
   function failRoute(req, res) {
+    logger.error(404 + "error")
     res.status(404).render("Error");
   }
  function getDatos(req, res) {
     var userSes = req.user;
-    console.log("usuario logueado");
+    
     if (userSes) {
-        res.render("userForm", {welcome:`nombre de usuario: ${userSes.username}` , message:`email : ${userSes.email}, `, user: true} );}
+       logger.info("usuario logueado"); 
+      res.render("userForm", {welcome:`nombre de usuario: ${userSes.username}` , message:`email : ${userSes.email}, `, user: true} );}
         else {
             res.render("userForm", {welcome: "", user: false} );
         }

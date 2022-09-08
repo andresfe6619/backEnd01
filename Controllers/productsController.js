@@ -3,7 +3,7 @@ import {Router}  from "express";
 const router = new Router();
 import fs from 'fs'; 
 import bodyParser from 'body-parser';
-
+import {logger} from "../logs/logger.js"
 
 class Contenedor {
     constructor( id) {
@@ -30,7 +30,7 @@ async saveObject(object) {
 //  const guardar = async () => {
 //  try{
     await fs.promises.writeFile("./contenedor.json",JSON.stringify( this.Product ) )
-    console.log("Producto guardado");
+    logger.info("Producto guardado");
     // } catch(error) {
     //     console.log(error);
     // }
@@ -47,8 +47,8 @@ async getAll()  {
     //    try{
     const data = (await  fs.promises.readFile("./contenedor.json", "utf-8" ))
        
-    console.log("Obteniendo todos los productos")
-    return ( data ? JSON.parse(data) : console.log("El archivo no existe o esta vacio"));
+    logger.info("Obteniendo todos los productos")
+    return ( data ? JSON.parse(data) : logger.error("El archivo no existe o esta vacio"));
         
 //    } catch(error) {
 //                  console.log(error);
@@ -64,7 +64,7 @@ async getById(Id) {
     const data = JSON.parse(await  fs.promises.readFile("./contenedor.json", "utf-8" ))
        
     const product = data.find(product => product.id === Number(Id));
-    console.log("Obteniendo por Id")  
+    logger.info("Obteniendo por Id")  
     return ( product ?  product : {Error: "El producto no existe"} );
         
 //    } catch(error) {
@@ -89,7 +89,7 @@ async updateById(Id, prod) {
         // actualizarProducto.price = price;
         // actualizarProducto.thumbnail = thumbnail;
         data[index] = newProd;
-        console.log('prod actualizado', data);
+        logger.info('prod actualizado', data);
             await fs.promises.writeFile("./contenedor.json", JSON.stringify(data))
             // return ( actualizarProducto ?  actualizarProducto : {Error: "El producto no existe"});
 
@@ -109,7 +109,7 @@ async deleteById(Id) {
     const data = await this.getAll();
     // const productoAeliminar = data.find(product => product.id === Number(Id));
     const newData = data.filter(product => product.id !== Number(Id));
-    console.log(newData)
+    logger.info(newData)
     await fs.promises.writeFile("./contenedor.json",JSON.stringify( newData ) )
     // console.log("Producto eliminado por id")
     // return ( product ?  ( "el producto ha sido eliminado con exito"): ("El producto no existe"));
@@ -139,15 +139,18 @@ try {
         const prods = await Objeto5.getAll()
         //handlebars
         if (prods.length == 0) {
+            logger.warn(prods.length)
             res.render("products", {prods, });
         } else{
-        res.render("products", {prods, hasAny: true});
+        logger.info(prods.length)
+            res.render("products", {prods, hasAny: true});
         }
         
    
     } catch (error) {
         const prods = await Objeto5.getAll()
         //Handlebars
+        logger.error(error)
         res.render("products", {prods, hasAny: false});
       
     
@@ -165,9 +168,11 @@ const newProduct= (req, res) => {
         Objeto5.saveObject(objeto);
         // let id = Objeto5.Product.length;
         // res.sendStatus(Objeto5.Product[id-1]);
+        logger.info("Product saved")
+        logger.warn("redirecting to /api/productos/Listado")
         res.redirect("/api/productos/Listado");
     } catch (error) {
-        console.log(error);
+        logger.error(error);
     }
 };
 
@@ -179,9 +184,10 @@ const filterId= async(req, res) => {
              //   let idRandom= Number(req.params.id)
              //  let idRandom = Math.floor(Math.random() * (3 - 1+1) + 1);
          //  getById(idRandom)
+         logger.info(product)
          res.json(product)
      } catch (error) {
-        console.log(error)
+        logger.error(error)
      }
      
  };
@@ -202,9 +208,10 @@ const updateById= async(req, res) => {
     //   let idRandom= Number(req.params.id)
     //   let idRandom = Math.floor(Math.random() * (3 - 1+1) + 1);
     //   getById(idRandom)
-        res.json(newProd);
+      logger.info("Updated")  
+    res.json(newProd);
      } catch (error) {
-         console.log(error);
+         logger.error(error);
      }
     
 }
@@ -213,8 +220,10 @@ const deleteById= async(req, res) => {
     try {
         const {id} = req.params;
         await Objeto5.deleteById(id);
+        logger.warn(`El producto con id ${id} ha sido eliminado`)
         res.json(`El producto con id ${id} ha sido eliminado`);
     }catch (error) {
+        logger.error(`No se encontró el id ${id}`, error.message)
         res.json(`No se encontró el id ${id}`, error.message);
     }
     //     let idRandom= Number(req.params.id)

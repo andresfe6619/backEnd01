@@ -1,5 +1,6 @@
+import { logger } from 'handlebars';
 import {databaseConnectionSQLite3} from '../database.js'
-
+import {logger} from "../../logs/loggers.js"
 class Contenedor {
     constructor(table) {
         this.table = table
@@ -10,19 +11,22 @@ class Contenedor {
             
             await database("mensajes").insert(objeto)
             
-            console.log("Mensajes guardados");
+            logger.info("Mensajes guardados");
             return objeto;
         } catch (err) {
-            console.log("Error guardando Mensaje: ", err)
+            logger.error("Error guardando Mensaje: ", err)
         }
     }
 
     async getAllSQL() {
         try {
             const mensajes = await database.from("mensajes").select("*")
+            logger.info("trayendo mensajes")
             return mensajes;
+        
         } catch (err) {
             /* if no table */
+           logger.error("error trayendo mensajes")
             if (err.errno === 1146){
              
             }

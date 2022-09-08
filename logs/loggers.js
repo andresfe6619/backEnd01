@@ -4,8 +4,8 @@ dotenv.config({path: ".env"});
 const buildProdLogger = () => {
     const prodLogger = winston.createLogger({
       transports: [
-        new winston.transports.File({ filename: "src/logs/warnings.log", level: "warn", format: winston.format.combine(winston.format.timestamp(), winston.format.json()) }),
-        new winston.transports.File({ filename: "src/logs/errors.log", level: "error", format: winston.format.combine(winston.format.timestamp(), winston.format.json()) }),
+        new winston.transports.File({ filename: "logs/warnings.log", level: "warn", format: winston.format.combine(winston.format.timestamp(), winston.format.json()) }),
+        new winston.transports.File({ filename: "logs/errors.log", level: "error", format: winston.format.combine(winston.format.timestamp(), winston.format.json()) }),
       ],
     });
   
@@ -15,8 +15,8 @@ const buildProdLogger = () => {
   const buildDevLogger = () => {
     const devLogger = winston.createLogger({
       transports: [
-        new winston.transports.File({ filename: "src/logs/warnings.log", level: "warn", format: winston.format.combine(winston.format.timestamp(), winston.format.json()) }),
-        new winston.transports.File({ filename: "src/logs/errors.log", level: "error", format: winston.format.combine(winston.format.timestamp(), winston.format.json()) }),
+        new winston.transports.File({ filename: "logs/warnings.log", level: "warn", format: winston.format.combine(winston.format.timestamp(), winston.format.json()) }),
+        new winston.transports.File({ filename: "logs/errors.log", level: "error", format: winston.format.combine(winston.format.timestamp(), winston.format.json()) }),
         new winston.transports.Console({ level: "info", format: winston.format.combine(winston.format.timestamp(), winston.format.json()) })
       ],
     });

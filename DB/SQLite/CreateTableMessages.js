@@ -1,5 +1,5 @@
 const database = require('../database').databaseConnectionSQLite3
-
+import {logger} from "../../logs/loggers.js"
 const createMessagesTable = async () => {
     try{
         await database.schema.dropTableIfExists('mensajes')
@@ -8,10 +8,10 @@ const createMessagesTable = async () => {
             MessageTable.string("Date", 50).notNullable();
             MessageTable.string('Message', 50).notNullable();
         })
-        console.log("Message Table created")
+        logger.info("Message Table created")
         
     } catch(err){
-        console.log("error: ", err);
+        logger.error("error: ", err);
         database.destroy();
     }
         

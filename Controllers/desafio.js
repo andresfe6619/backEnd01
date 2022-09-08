@@ -1,6 +1,7 @@
 import util from "util"
 import {port, mode } from "../yargs.js" 
 import {fork} from "child_process"
+import {logger} from "../logs/loggers.js"
 import os from "os"
 const info = {
 Argumentos  : port, mode, 
@@ -15,7 +16,8 @@ cpus : os.cpus().length
 
 
 const desafio = async (req, res) => {
-res.render("desafios", {Arguments : info.Argumentos, platform: info.plataforma, node: info.node,   memory: info.memoria, path : info.path, id: info.id, carpeta: info.carpeta, cpus: info.cpus} )
+logger.info("renderizando")
+    res.render("desafios", {Arguments : info.Argumentos, platform: info.plataforma, node: info.node,   memory: info.memoria, path : info.path, id: info.id, carpeta: info.carpeta, cpus: info.cpus} )
 
 // let longitudNormalized = JSON.stringify(info).length;
 // console.log(longitudNormalized)

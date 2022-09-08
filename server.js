@@ -33,7 +33,7 @@ os.cpus().map(() => {
 }
 )
 cluster.on("exit", worker=>{
-  console.log(`Worker ${worker.process.pid} died, a new one is being created`)
+  logger.warn(`Worker ${worker.process.pid} died, a new one is being created`)
    cluster.fork()
 } )
 
@@ -45,7 +45,7 @@ app.use((req, res, next)=>{
     next()
 })
 app.use((req, res) => {
-  logger.warn(`Ruta no encontrada: ${req.method} - ${req.path}`)
+  logger.error(`Ruta no encontrada: ${req.method} - ${req.path}`)
   res.status(404).json({ error404: `Ruta no encontrada ${req.method} ${req.path}` });
 })
 
@@ -59,9 +59,13 @@ function comparePass(password, hash){
     return bcrypt.compareSync(password, hash);
 }
 
-const expressServer= app.listen(port, () => {
+const expressServer= app.listen(port, (err) => {
+  if(!err){
     logger.info(`Servidor corriendo en el puerto ${port}`);
-})
+  } else{
+    logger.error("error iniciando el servidor")
+  }
+  })
 
 const io = new Server(expressServer);
 app.use(express.static(path.join(__dirname, './public')))
@@ -127,7 +131,7 @@ const login = new LocalStrategy(async (username, password, done) => {
 
     done(null, user);
   } catch (err) {
-    console.log("Error login", err);
+    logger.error("Error login", err);
     done("Error login", null);
   }
 });
@@ -144,14 +148,11 @@ passport.deserializeUser((id, done) => {
 
 
 app.use("/api", rutas)
- app.use((req, res) => {
-   res.status(404).json({error: -2, descripcion: `Ruta '${req.path}' Método '${req.method}' - No Implementada`});
- })
 
 
 
 io.on("connection", async (socket) => { 
-  console.log( "un cliente se ha conectado")
+  logger.info( "un cliente se ha conectado")
 
 const products = await contenedorProductos.getAll()
 const messages = await chat.getAll()
@@ -176,7 +177,7 @@ socket.on ("client: new product", async product => {
     
 socket.on('client:message', async author12 => {
   const message = {author: {id : author12.id , nombre: author12.nombre , apellido: author12.apellido , edad : author12.edad, alias: author12.alias , avatar: author12.avatar}, Message: author12.Message}
-console.log(`Mensaje nuevo : ${message}`)
+logger.info(`Mensaje nuevo : ${message}`)
 
 await chat.save(message) 
   

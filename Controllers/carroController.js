@@ -1,7 +1,7 @@
 import  Contenedor from './carroModelo.js'
 
 const Objeto5 = new Contenedor([]);
-
+import {logger} from "./logs/loggers.js"
 import fs   from 'fs/promises';
 import { timeStamp }  from 'console';
 
@@ -14,9 +14,10 @@ const saveCart = async(req, res)=>{
     }
     try{
         await Objeto5.saveCartCont(newCart)
+        logger.info(newCart)
         res.json(newCart)
     }catch(error){
-        console.log(error)
+        logger.error(error)
     }
 }
 
@@ -49,10 +50,11 @@ const newProduct= (req, res) => {
     try {
         const {products} = req.body;
         let newCart = {products};
-        Objeto5.saveObject(objeto);
-        res.send(`el carrito ${name} ha sido creado`);
+        Objeto5.saveObject(newCart);
+        logger.info(`el carrito  ha sido creado`)
+        res.send(`el carrito  ha sido creado`);
     } catch (error) {
-        console.log(error);
+        logger.error(error);
     }
 };
 
@@ -61,9 +63,11 @@ const filterId= async(req, res) => {
      try {
          const {id} = req.params;
          const product = await Objeto5.getById(id);
+         logger.info(product)
          res.json(product)
      } catch (error) {
-        console.log(error)
+       
+        logger.error(error)
      }
      
  };
@@ -73,10 +77,10 @@ const filterId= async(req, res) => {
         const prods = await Objeto5.getAll()
         const {id} = req.params;
         const product = await Objeto5.getById(id);
-
+        logger.info(prods)
         res.json(prods)
     } catch (error) {
-        console.log(error)
+        logger.error(error)
     }
     }
 
@@ -102,8 +106,10 @@ const deleteById= async(req, res) => {
     try {
         const {id} = req.params;
         await Objeto5.deleteById(id);
+        logger.warn(`El carrito con id ${id} ha sido eliminado`)
         res.json(`El carrito con id ${id} ha sido eliminado`);
     }catch (error) {
+       logger.error(error)
         res.json(`No se encontró el id ${id}`, error.message);
     }
 
@@ -114,9 +120,10 @@ const addProductById= async(req, res) => {
         const product = await Objeto5.addFromdb(id);
         const cart = await Objeto5.addProductFrom();
         const add = await Objeto5.addProductInto(cart, product);
+        logger.info(product)
         res.json(product);
     } catch (error) {
-        console.log(error);
+        logger.error(error);
     }
 }
 const deleteByIdCart = async(req, res) => { 
@@ -133,10 +140,10 @@ const deleteByIdCart = async(req, res) => {
         // const result = cart.filter(item => item != prod)
         const result = cart.filter(item => item.id != Number(id_prod))
         await Objeto5.addProductInto(erase, result)
-       
+        logger.warn(`El producto con el id ${id_prod} ha sido eliminado`)
         res.send(`El producto con el id ${id_prod} ha sido eliminado`);
     } catch (error) {
-        console.log(error);
+        logger.error(error);
 
     }
 }
