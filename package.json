@@ -37,7 +37,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./server.js"
+     "setup" : "curl -X GET 'http://localhost:8080/api/desafios/process'",
+    "test" : " node benchmark.js && curl -X GET 'http://localhost:8080/api/desafios/process'", 
+    "start": "0x ./server.js"
   },
   "repository": {
     "type": "git",
@@ -50,8 +52,8 @@
   },
   "homepage": "https://github.com/andresfe6619/backEnd01#readme",
   "keywords": [],
-  "description": "",
   "devDependencies": {
     "handlebars": "^4.5.0"
-  }
+  },
+  "description": ""
 }
